@@ -2,6 +2,7 @@
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
+import { User } from "lucide-react";
 
 //=== Icons Lib===
 import AuthPagesNav from "./AuthPagesNav";
@@ -25,7 +26,8 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export default function Login({
+
+export default function Signup({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -34,18 +36,13 @@ export default function Login({
       <AuthPagesNav />
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
-          className={cn(
-            "flex flex-col gap-6 w-full md:w-lg -mt-3 py-5",
-            className,
-          )}
+          className={cn("flex flex-col gap-6 w-full md:w-lg py-5", className)}
           {...props}
         >
-          <Card className="shadow-mainShadow py-5 px-7 outline-1 outline-white">
+          <Card className="card shadow-mainShadow py-5 px-7 outline-1 outline-white">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl capitalize">sign in</CardTitle>
-              <CardDescription>
-                Welcome back, you’ve been missed!
-              </CardDescription>
+              <CardTitle className="text-3xl capitalize">sign up</CardTitle>
+              <CardDescription>Connect with every application!</CardDescription>
             </CardHeader>
             <CardContent>
               <form>
@@ -89,6 +86,23 @@ export default function Login({
                     OR
                   </FieldSeparator>
 
+                  {/* Full Name Input Field */}
+                  <Field className="relative before:content-['Full_Name']  before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
+                    <User
+                      className="w-fit! absolute left-[16px] top-[50%] translate-y-[-50%] text-mutedText"
+                      size={19}
+                    />
+                    <Input
+                      id="Name"
+                      type="text"
+                      placeholder="Full Name"
+                      required
+                      className="ps-10 pe-3 py-6 placeholder:text-mutedText"
+                    />
+                  </Field>
+
+                  {/*=== Full Name Input Field ===*/}
+
                   {/* Email Input Field */}
                   <Field className="relative before:content-['Email']  before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
                     <Mail
@@ -100,7 +114,7 @@ export default function Login({
                       type="email"
                       placeholder="Your Email"
                       required
-                      className="ps-10 pe-3 py-6    placeholder:text-mutedText"
+                      className="ps-10 pe-3 py-6  placeholder:text-mutedText"
                     />
                   </Field>
 
@@ -163,7 +177,7 @@ export default function Login({
                         href="#"
                         className="text-brand decoration-0 font-semibold"
                       >
-                        Sign up
+                        Sign In
                       </a>
                     </FieldDescription>
                   </Field>

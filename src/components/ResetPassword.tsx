@@ -2,6 +2,7 @@
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
+import { User } from "lucide-react";
 
 //=== Icons Lib===
 import AuthPagesNav from "./AuthPagesNav";
@@ -25,7 +26,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-export default function Login({
+export default function ResetPassword({
   className,
   ...props
 }: React.ComponentProps<"div">) {
@@ -35,16 +36,18 @@ export default function Login({
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
           className={cn(
-            "flex flex-col gap-6 w-full md:w-lg -mt-3 py-5",
+            "flex flex-col gap-6 w-full md:w-lg -mt-5 py-5",
             className,
           )}
           {...props}
         >
           <Card className="shadow-mainShadow py-5 px-7 outline-1 outline-white">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl capitalize">sign in</CardTitle>
+              <CardTitle className="text-3xl capitalize">
+                forgot password
+              </CardTitle>
               <CardDescription>
-                Welcome back, you’ve been missed!
+                Enter your email address to receive a password reset link.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -100,70 +103,27 @@ export default function Login({
                       type="email"
                       placeholder="Your Email"
                       required
-                      className="ps-10 pe-3 py-6    placeholder:text-mutedText"
+                      className="ps-10 pe-3 py-6  placeholder:text-mutedText"
                     />
                   </Field>
 
                   {/*=== Email Input Field ===*/}
-
-                  {/* Password Field */}
-                  <Field className="relative before:content-['Password'] before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
-                    <LockKeyhole
-                      className="w-fit! absolute left-[16px] top-[50%] translate-y-[-50%] text-mutedText"
-                      size={19}
-                    />
-                    <Input
-                      id="password"
-                      type="Password"
-                      placeholder="Password"
-                      required
-                      className="ps-10 pe-3 py-6 placeholder:text-mutedText"
-                    />
-                  </Field>
-                  {/*=== Password Field ===*/}
-
-                  <section className="flex">
-                    {/* CheckBox */}
-                    <Field orientation="horizontal">
-                      <Checkbox
-                        id="terms-checkbox"
-                        name="terms-checkbox"
-                        className="cursor-pointer"
-                      />
-                      <Label
-                        htmlFor="terms-checkbox"
-                        className="capitalize text-mutedText font-normal cursor-pointer"
-                      >
-                        remember me
-                      </Label>
-                    </Field>
-                    {/*=== CheckBox ===*/}
-
-                    {/* Forgot Password Link */}
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline text-brand whitespace-nowrap"
-                    >
-                      Forgot your password?
-                    </a>
-                    {/*=== Forgot Password Link ===*/}
-                  </section>
 
                   <Field>
                     <Button
                       type="submit"
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                     >
-                      Log in
+                      reset password
                     </Button>
                     <FieldDescription className="text-center">
-                      Don&apos;t have an account yet?{" "}
+                      Remember your password?{" "}
                       {/* ####### Here We Can But Link Tag ######### */}
                       <a
                         href="#"
                         className="text-brand decoration-0 font-semibold"
                       >
-                        Sign up
+                        Sign In
                       </a>
                     </FieldDescription>
                   </Field>

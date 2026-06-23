@@ -71,7 +71,7 @@ export default function AllProjectsPage() {
 
   return (
     <>
-      <div className="bg-gray-100 min-h-screen pt-30">
+      <div className="bg-gray-100 min-h-screen pt-10">
         <div className="flex flex-col w-11/12 m-auto">
           <div className="flex justify-between items-center">
             <h1 className="text-black text-xl font-medium">All Projects</h1>

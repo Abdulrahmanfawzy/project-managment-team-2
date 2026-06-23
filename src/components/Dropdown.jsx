@@ -17,7 +17,7 @@ export default function Dropdown({
         </div>
         {projectsData.map((project) => (
           <div
-            key={project.id ?? index}
+            key={project.id}
             className="cursor-pointer"
             onClick={() => {
               setSelectedProject(project.projectName);

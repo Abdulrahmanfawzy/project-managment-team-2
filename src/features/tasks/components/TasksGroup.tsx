@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button"
 import { EllipsisVertical, Plus } from "lucide-react"
 import TaskCard from "./TaskCard"
 import type { ITask } from "../interfaces";
+import { TasksDialog } from "./NewTaskDialog";
+import { useState } from "react";
 
 interface IProps{   
     title:string;
@@ -10,6 +12,9 @@ interface IProps{
 }
 
 function TasksGroup({title, bgColor, tasks}:IProps) {
+
+    const [open, setOpen] = useState(false);
+
     return (
         <div className="rounded-2xl shadow-mainShadow flex flex-col gap-2">
 
@@ -19,7 +24,14 @@ function TasksGroup({title, bgColor, tasks}:IProps) {
             </div>
 
             <div className="p-4 flex flex-col gap-5">
-                <Button className="rounded-3xl py-5 cursor-pointer border-2 border-brand border-dashed bg-relative w-full text-brand transition-all hover:bg-brand hover:text-white">Add Task <Plus/> </Button>
+                {/* <TasksDialog triggerBtn={
+                    <Button className="rounded-3xl py-5 cursor-pointer border-2 border-brand border-dashed bg-relative w-full text-brand transition-all hover:bg-brand hover:text-white">Add Task <Plus/> </Button>
+                }/> */}
+
+                <TasksDialog open={open} setOpen={setOpen}/>
+
+                <Button onClick={() => setOpen(true)} className="rounded-3xl py-5 cursor-pointer border-2 border-brand border-dashed bg-relative w-full text-brand transition-all hover:bg-brand hover:text-white">Add Task <Plus/> </Button>
+                {/* </TasksDialog> */}
 
                 {tasks?.map((task, index) => (
                     <TaskCard key={index} {...task} />

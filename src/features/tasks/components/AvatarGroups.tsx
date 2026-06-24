@@ -5,9 +5,9 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
-function Avatars() {
+function Avatars({className}:{className?:string}) {
     return (
-        <AvatarGroup className="grayscale">
+        <AvatarGroup className={`grayscale ${className}`}>
         <Avatar className="w-6 h-6">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>

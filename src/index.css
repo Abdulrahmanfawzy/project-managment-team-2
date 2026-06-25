@@ -3,17 +3,14 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
-*{
-  box-sizing: border-box;
-}
-
 :root {
-  --brand: #005AFB;
+  --brand: #005afb;
   --text: #6b6375;
   --text-h: #08060d;
-  --main-text:#1F2937;
-  --muted-text:#718096;
-  --bg: #fff;
+  --main-text: #1f2937;
+  --muted-text: #718096;
+  /* --bg: #fff; */
+  --bg: #F6F8FA;
   --border: oklch(0.922 0 0);
   --code-bg: #f4f3ec;
   --accent: oklch(0.97 0 0);
@@ -21,11 +18,9 @@
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
   --mainShadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --heading: system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
-
-  --background: oklch(1 0 0);
 
   --foreground: oklch(0.145 0 0);
 
@@ -94,7 +89,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  
   @media (max-width: 1024px) {
     font-size: 16px;
   }
@@ -103,10 +98,11 @@
 
 @theme inline {
   --color-brand: var(--brand);
-  --color-mainText:var(--main-text);
-  --color-mutedText:var(--muted-text);
+  --color-mainText: var(--main-text);
+  --color-mutedText: var(--muted-text);
+  --color-background: var(--background);
   --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -146,21 +142,17 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-
   /* Shadows */
-  --shadow-mainShadow:var(--mainShadow)
+  --shadow-mainShadow: var(--mainShadow);
 }
 
-.mainContainer{
-  @apply mx-auto px-7 max-w-full sm:max-w-[37rem] md:max-w-[45rem] lg:max-w-[60rem] xl:max-w-[75rem] 2xl:max-w-[90rem];
+.active{
+  background-color: var(--brand);
+  color:white;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
 }
 
-
-.primaryIconEffect{
-  background-color:#E6EFFF;
-  color:var(--brand);
-}
-.dangerIconEffect{
-  background-color:#FAECF6; 
-  color:#A43782;
+.mainContainer {
+  @apply mx-auto px-7 max-w-full sm:max-w-[40rem] md:max-w-[48rem] lg:max-w-[64rem] xl:max-w-[80rem] 2xl:max-w-[96rem];
 }

@@ -1,7 +1,8 @@
 import AuthPagesNav from "./AuthPagesNav"
 import AnalysisCard from "./AnalysisCard";
 import ProfilePageAbout from "./ProfilePageAbout";
-
+// React Hooks
+import {useState} from "react";
 // Icons
 import { CalendarDays } from "lucide-react";
 import { Settings } from "lucide-react";
@@ -9,7 +10,42 @@ import { BriefcaseBusiness } from "lucide-react";
 import { Clock } from "lucide-react";
 
 
+const linksContents=[
+  "overview",
+  "tasks",
+  "files",
+]
+
+
+
+
 const ProfilePage=()=>{
+  const [activeLinkIndex,setActiveLinkIndex] = useState(0)
+
+
+
+function handleProfileMainLinks() {
+  /*====== Here We Want to Put Link Tag From React Router Dom ====== */
+  return linksContents.map((linkContent, index) => {
+    return (
+      <a
+        key={index}
+        className={`relative inline-block cursor-pointer  py-2 capitalize text-lg font-semibold before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-brand hover:text-brand transition-all duration-200 ${index === activeLinkIndex ? "before:visible text-brand" : " before:invisible text-mainText"}`}
+        onClick={() => {
+          handleActiveLinks(index);
+        }}
+      >
+        <li>{linkContent}</li>
+      </a>
+    );
+  });
+}
+
+function handleActiveLinks(index) {
+  setActiveLinkIndex(index);
+}
+
+
     return (
       <>
         <AuthPagesNav />
@@ -73,11 +109,15 @@ const ProfilePage=()=>{
             {/*=== Client Tasks Analysis ===*/}
           </section>
           {/* Switch Pages Links */}
-          <section className="mainContainer mb-3"></section>
+          <section className="mainContainer my-5">
+            <ul id="profileLinks" className="flex items-center gap-7 flex-wrap">
+              {handleProfileMainLinks()}
+            </ul>
+          </section>
           {/*=== Switch Pages Links ===*/}
 
           <section className="mainContainer">
-            <ProfilePageAbout/>
+            <ProfilePageAbout />
           </section>
         </section>
       </>

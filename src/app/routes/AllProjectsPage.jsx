@@ -9,7 +9,8 @@ import { useState } from "react";
 import Dropdown from "../../components/Dropdown";
 import NewProjectModal from "../../components/NewProjectModal";
 import Projectbref from "../../components/Projectbref";
-import Overview from "./Overview";
+import Overview from "../../components/AllProjectsPage/Overview";
+import Tasks from "../../components/AllProjectsPage/Tasks";
 
 export default function AllProjectsPage() {
   // Use States
@@ -23,28 +24,69 @@ export default function AllProjectsPage() {
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [selectedPage, setSelectedPage] = useState("all projects");
   let [selectedProject, setSelectedProject] = useState("");
-  let [projectsData, setProjects] = useState([
-    {
-      id: 1,
-      projectName: "Alpha Platform",
-      startDate: "2026-03-01",
-      deadline: "2026-06-15",
-      status: "Active",
-      filesCount: 22,
-      team: ["Ahmed", "Sara", "Ali"],
-      priority: "High",
-    },
-    {
-      id: 2,
-      projectName: "SepetGo E-Commerce",
-      startDate: "2026-01-10",
-      deadline: "2026-04-20",
-      status: "Done",
-      filesCount: 15,
-      team: ["Omar", "Mona"],
-      priority: "Medium",
-    },
-  ]);
+let [projectsData, setProjects] = useState([
+  {
+    id: 1,
+    projectName: "Alpha Platform",
+    startDate: "2026-03-01",
+    deadline: "2026-06-15",
+    status: "Active",
+    filesCount: 22,
+    team: ["Ahmed", "Sara", "Ali"],
+    priority: "High",
+  },
+  {
+    id: 2,
+    projectName: "SepetGo E-Commerce",
+    startDate: "2026-01-10",
+    deadline: "2026-04-20",
+    status: "Done",
+    filesCount: 15,
+    team: ["Omar", "Mona"],
+    priority: "Medium",
+  },
+  {
+    id: 3,
+    projectName: "Exam Platform AI",
+    startDate: "2026-03-15",
+    deadline: "2026-07-01",
+    status: "Active",
+    filesCount: 34,
+    team: ["Ahmed", "Karim", "Nour"],
+    priority: "High",
+  },
+  {
+    id: 4,
+    projectName: "Delta Cyber Security Dashboard",
+    startDate: "2026-02-01",
+    deadline: "2026-05-30",
+    status: "Review",
+    filesCount: 18,
+    team: ["Ali", "Sara"],
+    priority: "High",
+  },
+  {
+    id: 5,
+    projectName: "HR Management Portal",
+    startDate: "2026-04-01",
+    deadline: "2026-08-15",
+    status: "Active",
+    filesCount: 12,
+    team: ["Mona", "Zain", "Omar"],
+    priority: "Low",
+  },
+  {
+    id: 6,
+    projectName: "Speed Typing Test App",
+    startDate: "2026-02-10",
+    deadline: "2026-03-20",
+    status: "Done",
+    filesCount: 8,
+    team: ["Ahmed", "Youssef"],
+    priority: "Medium",
+  },
+  
+]);
 
   // FIlter Projects By Search
 
@@ -212,6 +254,7 @@ export default function AllProjectsPage() {
                 selectedPage={selectedPage}
               />
               {selectedPage === "overview" && <Overview />}
+              {selectedPage === "tasks" && <Tasks />}
             </>
           )}
         </div>

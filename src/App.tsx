@@ -5,6 +5,7 @@ import LangSwitcher from "./components/shared/lang-switcher";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ResetPassword from "./components/ResetPassword";
+import ProfilePage
 export default function App() {
   const { t } = useTranslation();
 

@@ -1,5 +1,4 @@
-import { useTranslation } from "react-i18next";
-import LangSwitcher from "./components/shared/lang-switcher";
+import AllProjectsPage from "./app/routes/AllProjectsPage";
 
 // Main Components
 import AuthPageNav from "./components/AuthPagesNav";
@@ -9,11 +8,10 @@ import ResetPassword from "./components/ResetPassword";
 import ProfilePage from "./components/profilePage";
 
 export default function App() {
-  const { t } = useTranslation();
-
   return (
     <>
       <ProfilePage />
+      <AllProjectsPage />
       {/* <ResetPassword/> */}
     </>
   );

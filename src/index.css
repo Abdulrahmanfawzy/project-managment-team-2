@@ -11,6 +11,8 @@
   --brand: #005AFB;
   --text: #6b6375;
   --text-h: #08060d;
+  --main-text:#1F2937;
+  --muted-text:#718096;
   --bg: #fff;
   --border: oklch(0.922 0 0);
   --code-bg: #f4f3ec;
@@ -18,26 +20,10 @@
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
+  --mainShadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 
   --background: oklch(1 0 0);
 
@@ -97,11 +83,28 @@
 
   --sidebar-border: oklch(0.922 0 0);
 
-  --sidebar-ring: oklch(0.708 0 0)
+  --sidebar-ring: oklch(0.708 0 0);
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+
 }
 
 @theme inline {
   --color-brand: var(--brand);
+  --color-mainText:var(--main-text);
+  --color-mutedText:var(--muted-text);
   --font-heading: var(--font-sans);
   --font-sans: 'Geist Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
@@ -142,4 +145,22 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+
+  /* Shadows */
+  --shadow-mainShadow:var(--mainShadow)
+}
+
+.mainContainer{
+  @apply mx-auto px-7 max-w-full sm:max-w-[37rem] md:max-w-[45rem] lg:max-w-[60rem] xl:max-w-[75rem] 2xl:max-w-[90rem];
+}
+
+
+.primaryIconEffect{
+  background-color:#E6EFFF;
+  color:var(--brand);
+}
+.dangerIconEffect{
+  background-color:#FAECF6; 
+  color:#A43782;
 }

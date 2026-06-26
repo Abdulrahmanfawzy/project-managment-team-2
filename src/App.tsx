@@ -1,12 +1,21 @@
 import Router from "./app/index";
-
-export default function App() {
-  const { t } = useTranslation();
+import Login from "./components/Login";
+import ProfilePage from "./components/profilePage";
+import Calendar from "./calendar/calendar";
+import { CalendarProvider } from "./calendar/calendar-context";
+// const { t } = useTranslation();
 
 export default function App() {
   return (
     <>
-      <Router/>
+      {/* <Login/> */}
+      {/* <ProfilePage/> */}
+      {/* <Router/> */}
+      <CalendarProvider>
+        <Calendar />
+      </CalendarProvider>
     </>
   );
 }
+
+// Flatten

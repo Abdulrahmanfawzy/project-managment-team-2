@@ -11,6 +11,7 @@ import NewProjectModal from "../../components/NewProjectModal";
 import Projectbref from "../../components/Projectbref";
 import Overview from "../../components/AllProjectsPage/Overview";
 import Tasks from "../../components/AllProjectsPage/Tasks";
+import Teams from "../../components/AllProjectsPage/teams/Teams";
 
 export default function AllProjectsPage() {
   // Use States
@@ -255,6 +256,7 @@ let [projectsData, setProjects] = useState([
               />
               {selectedPage === "overview" && <Overview />}
               {selectedPage === "tasks" && <Tasks />}
+              {selectedPage === "teams" && <Teams /> }
             </>
           )}
         </div>

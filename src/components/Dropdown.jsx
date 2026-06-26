@@ -1,6 +1,6 @@
 export default function Dropdown({
   projectsData,
-  setSelectedProject,
+  setSelectedProjectSelect,
   setIsOpen,
 }) {
   return (
@@ -9,7 +9,7 @@ export default function Dropdown({
         <div
           className="cursor-pointer"
           onClick={() => {
-            setSelectedProject("All Projects");
+            setSelectedProjectSelect("All Projects");
             setIsOpen(false);
           }}
         >
@@ -20,7 +20,7 @@ export default function Dropdown({
             key={project.id}
             className="cursor-pointer"
             onClick={() => {
-              setSelectedProject(project.projectName);
+              setSelectedProjectSelect(project.projectName);
               setIsOpen(false);
             }}
           >

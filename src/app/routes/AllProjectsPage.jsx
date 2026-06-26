@@ -12,6 +12,7 @@ import Projectbref from "../../components/Projectbref";
 import Overview from "../../components/AllProjectsPage/Overview";
 import Tasks from "../../components/AllProjectsPage/Tasks";
 import Teams from "../../components/AllProjectsPage/teams/Teams";
+import FilesTab from "../../components/AllProjectsPage/FilesTab";
 
 export default function AllProjectsPage() {
   // Use States
@@ -257,6 +258,7 @@ let [projectsData, setProjects] = useState([
               {selectedPage === "overview" && <Overview />}
               {selectedPage === "tasks" && <Tasks />}
               {selectedPage === "teams" && <Teams /> }
+              {selectedPage === "files" && <FilesTab /> }
             </>
           )}
         </div>

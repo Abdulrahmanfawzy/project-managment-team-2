@@ -1,12 +1,14 @@
 import Router from "./app/index";
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 
-export default function App() {
-  const { t } = useTranslation();
+const queryClient = new QueryClient()
 
 export default function App() {
   return (
     <>
-      <Router/>
+      <QueryClientProvider client={queryClient}>
+        <Router />
+      </QueryClientProvider>
     </>
   );
 }

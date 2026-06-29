@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import tasksList from "@/features/tasks/api/tasks";
 import SearchDemo from "@/features/tasks/components/toolbar/Search";
 import SelectDemo from "@/features/tasks/components/toolbar/Select";
 import TasksGroup from "@/features/tasks/components/TasksGroup";
@@ -7,10 +6,20 @@ import { Plus } from "lucide-react";
 import { TasksDialog } from "@/features/tasks/components/NewTaskDialog";
 import { useState } from "react";
 import { ToastContainer} from 'react-toastify';
+import { useTasksQuery } from "@/features/tasks/hooks/useTasksQuery";
+import Spinner from "@/components/shared/Spinner";
+import TasksGroupSkeleton from "@/features/tasks/components/TasksGroupSkeleton";
 
 function TasksPage() {
 
+  const bgColors = ["bg-white","bg-blue-100", "bg-purple-100", "bg-green-100"]
+
   const [open, setOpen] = useState(false);
+
+  const {isPending, data:tasksList, error}= useTasksQuery();
+  console.log(tasksList)
+
+
   return (
     <div className="max-w-7xl mx-auto bg-background py-5 max-lg:px-5">
       <div className="flex justify-between items-center mb-5">
@@ -44,16 +53,30 @@ function TasksPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-between">
-        {tasksList.map((taskGroup, i) => (
+
+        {isPending && Array.from({ length: 4 }, () => <TasksGroupSkeleton />)}
+
+        {error && <p>Error: {error.message}</p>}
+
+        {/* {tasksList?.data.map((taskGroup, i) => (
           <TasksGroup
             title={`${taskGroup[0].status}`}
             bgColor={taskGroup[0].bgColor}
             tasks={taskGroup}
           />
+        ))} */}
+        {tasksList?.data.map((task, i) => (
+          <TasksGroup
+            key={task.id}
+            title={`${task.title}`}
+            bgColor={bgColors[i]} 
+            tasks={[task]}
+          />
         ))}
+        
 
-        {/* <TasksGroup title="In Progress" bgColor="bg-blue-100"/>
-          <TasksGroup title="In Review" bgColor="bg-purple-100" /> */}
+
+
       </div>
       
       <ToastContainer/>

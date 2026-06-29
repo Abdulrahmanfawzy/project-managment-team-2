@@ -17,7 +17,7 @@ const AnalysisCard: React.FC<CardProps> = ({
         <h4 className="capitalize font-semibold text-mutedText text-lg mb-7">
           {title}
         </h4>
-        <p className="text-mainText text-5xl font-bold">{innerNumber}</p>
+        <p className="text-mainText text-4xl font-bold">{innerNumber}</p>
       </section>
       <section className={`rounded-full p-4 ${colorClassEffect}`}>
         <Icon size={30} />

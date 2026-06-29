@@ -49,7 +49,7 @@ export default function TasksGroupSkeleton() {
                 </div>
 
                 {/* Task 2 */}
-                {/* <div className="bg-gray-100 rounded-2xl py-4 px-3 shadow-md flex flex-col gap-3.5 h-55">
+                <div className="bg-gray-100 rounded-2xl py-4 px-3 shadow-md flex flex-col gap-3.5 h-55">
                     <div className="flex justify-between items-center">
                         <Skeleton className="h-5 w-28" />
                         <Skeleton className="h-6 w-14 rounded-full" />
@@ -77,7 +77,7 @@ export default function TasksGroupSkeleton() {
                             <Skeleton className="h-5 w-20" />
                         </div>
                     </div>
-                </div> */}
+                </div>
 
             </div>
         </div>

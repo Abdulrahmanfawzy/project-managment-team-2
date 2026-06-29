@@ -13,6 +13,7 @@ import TasksGroupSkeleton from "@/features/tasks/components/TasksGroupSkeleton";
 function TasksPage() {
 
   const bgColors = ["bg-white","bg-blue-100", "bg-purple-100", "bg-green-100"]
+  const status= ["To-do", "In Progress", "In Review", "Completed"]
 
   const [open, setOpen] = useState(false);
 
@@ -65,17 +66,17 @@ function TasksPage() {
             tasks={taskGroup}
           />
         ))} */}
-        {tasksList?.data.map((task, i) => (
+        {/* {tasksList?.data.map((task, i) => (
           <TasksGroup
             key={task.id}
             title={`${task.title}`}
             bgColor={bgColors[i]} 
             tasks={[task]}
           />
+          ))} */}
+        {tasksList&& status.map((state,i)=>(
+          <TasksGroup key={i} title={state} bgColor={bgColors[i]} tasks={tasksList?.data}/>
         ))}
-        
-
-
 
       </div>
       

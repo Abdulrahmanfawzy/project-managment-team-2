@@ -3,7 +3,7 @@ import { EllipsisVertical, Plus } from "lucide-react"
 import TaskCard from "./TaskCard"
 import { TasksDialog } from "./NewTaskDialog";
 import { useState } from "react";
-import type { Ttask } from "../types/types";
+import type { Ttask, Ttasks } from "../types/types";
 
 interface IProps{   
     title:string;

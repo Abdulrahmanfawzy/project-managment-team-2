@@ -8,12 +8,13 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dropdown from "../../components/Dropdown";
-import NewProjectModal from "../../components/NewProjectModal";
+import NewProjectModal from "../../components/AllProjectsPage/NewProjectModal";
 import Projectbref from "../../components/Projectbref";
 import Overview from "../../components/AllProjectsPage/Overview";
 import Tasks from "../../components/AllProjectsPage/Tasks";
 import Teams from "../../components/AllProjectsPage/teams/Teams";
 import FilesTab from "../../components/AllProjectsPage/FilesTab";
+import AddProjectButton from "../../components/AllProjectsPage/AddProjectButton";
 
 export default function AllProjectsPage() {
   let [isOpen, setIsOpen] = useState(false);
@@ -103,12 +104,7 @@ export default function AllProjectsPage() {
             <>
               <div className="flex justify-between items-center">
                 <h1 className="text-black text-xl font-medium">All Projects</h1>
-                <button
-                  className="text-white bg-blue-600 rounded-xl text-sm px-3 py-1 cursor-pointer"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  Add Project +
-                </button>
+                <AddProjectButton setIsModalOpen={setIsModalOpen} />
                 {/* Add Project Modal */}
                 {isModalOpen && (
                   <NewProjectModal

@@ -6,12 +6,12 @@ import type { InputHTMLAttributes } from "react";
 function NameInput(props:InputHTMLAttributes<HTMLInputElement>) {
     return (
         <Field>
-        <FieldLabel
+        {/* <FieldLabel
             htmlFor="input-field-username"
             className="text-sm font-medium text-gray-500"
         >
             Task Name
-        </FieldLabel>
+        </FieldLabel> */}
         <div className="relative">
             <ClipboardCheck className="w-4 h-4 absolute left-3 top-2.5 text-gray-500" />
             <Input

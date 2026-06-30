@@ -7,13 +7,12 @@ import { TasksDialog } from "@/features/tasks/components/NewTaskDialog";
 import { useState } from "react";
 import { ToastContainer} from 'react-toastify';
 import { useTasksQuery } from "@/features/tasks/hooks/useTasksQuery";
-import Spinner from "@/components/shared/Spinner";
 import TasksGroupSkeleton from "@/features/tasks/components/TasksGroupSkeleton";
 
 function TasksPage() {
 
   const bgColors = ["bg-white","bg-blue-100", "bg-purple-100", "bg-green-100"]
-  const status= ["To-do", "In Progress", "In Review", "Completed"]
+  const status= ["Pending", "In_Progress", "In_Review", "Completed"]
 
   const [open, setOpen] = useState(false);
 
@@ -75,7 +74,7 @@ function TasksPage() {
           />
           ))} */}
         {tasksList&& status.map((state,i)=>(
-          <TasksGroup key={i} title={state} bgColor={bgColors[i]} tasks={tasksList?.data}/>
+          <TasksGroup key={i} title={state} bgColor={bgColors[i]} tasks={tasksList?.data.filter(task=> task.status.toLocaleLowerCase()==state.toLowerCase())}/>
         ))}
 
       </div>

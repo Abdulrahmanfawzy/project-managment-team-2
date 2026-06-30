@@ -1,14 +1,21 @@
-import { CalendarDays, MessageSquareText } from "lucide-react";
+import { CalendarDays, MessageSquareText, Trash, Trash2, X } from "lucide-react";
 import Avatars from "./AvatarGroups";
 import { ProgressWithLabel } from "./Progress";
 import type { Ttask } from "../types/types";
+import { DeleteDialog } from "./AlertDialog";
+import { useState } from "react";
 
 
 
-function TaskCard({title, description, priority, progress, start_date}: Ttask) {
+function TaskCard({id, title, description, priority, progress, start_date}: Ttask) {
+    const [open, setOpen] = useState(false);
     return (
-        <div className="bg-gray-100 rounded-2xl py-4 px-3 shadow-md w-full flex flex-col justify-between  gap-3.5 h-55">
-            <div className="flex justify-between items-center">
+        <div className="bg-gray-100 rounded-2xl py-4 px-3 shadow-md w-full flex flex-col justify-between  gap-3.5 h-55 relative">
+
+            <Trash2 onClick={()=> setOpen(true)} className="h-4 w-4 text-red-500 absolute top-2 right-6 cursor-pointer" />
+            <DeleteDialog open={open} setOpen={setOpen} id={id}/>
+
+            <div className="flex justify-between items-center mt-3.5">
                 <h3 className="text-black">{title}</h3>
                 <span className={`${priority=='high'?'bg-red-500': priority=='medium'?'bg-yellow-500':'bg-green-500'} text-white text-xs font-bold px-2 py-1 rounded-full`}>
                     {priority}

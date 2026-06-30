@@ -11,7 +11,7 @@ interface IProps{
     tasks?: Ttask[]
 }
 
-function TasksGroup({title, bgColor, tasks}:IProps) {
+function TasksGroup({title, bgColor, tasks,}:IProps) {
 
     const [open, setOpen] = useState(false);
 

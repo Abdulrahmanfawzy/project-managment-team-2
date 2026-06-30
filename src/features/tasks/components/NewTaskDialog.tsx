@@ -24,6 +24,7 @@ import { taskSchema } from "../schema/schema"
 import { zodResolver } from "@hookform/resolvers/zod";
 import type z from "zod"
 import { toast } from "react-toastify"
+import { Input } from "@/components/ui/input"
 
 export function TasksDialog({open, setOpen}:{open: boolean, setOpen:(open: boolean) => void}) {
     
@@ -58,11 +59,15 @@ export function TasksDialog({open, setOpen}:{open: boolean, setOpen:(open: boole
                             <NameInput {...register("name")} className="bg-blue-300"/>
                             <p className="text-sm text-destructive">{errors.name?.message}</p>
                         </div>
+                        <div>
+                            <Input {...register("description")} className="bg-blue-300" placeholder="Task Description"/>
+                            <p className="text-sm text-destructive">{errors.description?.message}</p>
+                        </div>
                         <div className="flex gap-5">
                             <div>
                                 {/* <DateInput {...register("startDate")} placeholder="Start Date" /> */}
                                 <Controller name="startDate" control={control} render={({ field }) => (
-                                        <DateInput {...register("startDate")} onChange={field.onChange}/>
+                                        <DateInput {...register("startDate")} onChange={field.onChange} placeholder="Start Date"/>
                                     )}
                                 />
                                 <p className="text-sm text-destructive">{errors.startDate?.message}</p>
@@ -70,16 +75,16 @@ export function TasksDialog({open, setOpen}:{open: boolean, setOpen:(open: boole
                             <div>
                                 {/* <DateInput {...register("endDate")} onChange={field.onChange} placeholder="End Date" /> */}
                                 <Controller name="endDate" control={control} render={({ field }) => (
-                                        <DateInput {...register("endDate")} onChange={field.onChange} />
+                                        <DateInput {...register("endDate")} onChange={field.onChange} placeholder="End Date" />
                                     )}
                                 />
                                 <p className="text-sm text-destructive ">{errors.endDate?.message}</p>
                             </div>
                         </div>
-                        <div>
+                        {/* <div>
                             <AddInput {...register("guests")} />
                             <p className="text-sm text-destructive">{errors.guests?.message}</p>
-                        </div>
+                        </div> */}
 
                         <AvatarGroups className="-translate-y-1"/>
 

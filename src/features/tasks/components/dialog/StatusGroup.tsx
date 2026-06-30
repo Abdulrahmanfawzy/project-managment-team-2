@@ -32,7 +32,7 @@ export function StatusToggleGroup({value, onValueChange}:{value: string, onValue
 
             {value=="in_progress" &&  
                 <InputGroup className="mt-2">
-                    <InputGroupInput placeholder="Progress" />
+                    <InputGroupInput placeholder="Progress"/>
                     <InputGroupAddon align="inline-end">
                     <InputGroupText>%</InputGroupText>
                     </InputGroupAddon>

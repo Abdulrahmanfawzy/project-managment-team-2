@@ -8,27 +8,28 @@ export type Ttask = {
   // progress?: number;
   // status?:string;
     id: number;
-    project_id: number;
+    project_id?: number;
+    name?: string;
     title: string;
     description: string;
     start_date: string;
-    due_date?: null;
+    due_date?: string | null;
     progress?: number;
-    status: string;
-    priority: string;
-    project: {
+    status?: string;
+    priority?: string;
+    project?: {
         id: number;
         name: string;
     };
-    assignees: [
+    assignees?: [
         {
         id: number;
         name: string;
         email: string;
         },
     ];
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
 };
 
 export type Ttasks = {
@@ -51,3 +52,16 @@ export type Ttasks = {
         total: number;
     };
 };
+
+export type TnewTask = {
+    project_id: number;
+    title: string;
+    description: string;
+    start_date: Date;
+    status: string;
+    due_date?: Date | null;
+    priority?: string;
+    guests?: string;
+    porogress?: number;
+    // file?: any;
+}

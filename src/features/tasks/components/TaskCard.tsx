@@ -31,7 +31,7 @@ function TaskCard({id, title, description, priority, progress, start_date}: Ttas
                 <div className="flex gap-3">
                     <span className="flex items-center text-sm gap-2">8 <MessageSquareText className="h-4 w-4" /></span>
                     {/* <span className="flex items-center text-sm gap-2">Dec 12 <CalendarDays className="h-4 w-4" /></span> */}
-                    <span className="flex items-center text-sm gap-2">{start_date}<CalendarDays className="h-4 w-4" /></span>
+                    <span className="flex items-center text-sm gap-2">{`${start_date}`}<CalendarDays className="h-4 w-4" /></span>
                 </div>
             </div>
         </div>

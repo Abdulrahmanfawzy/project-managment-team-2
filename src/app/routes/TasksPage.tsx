@@ -74,7 +74,7 @@ function TasksPage() {
           />
           ))} */}
         {tasksList&& status.map((state,i)=>(
-          <TasksGroup key={i} title={state} bgColor={bgColors[i]} tasks={tasksList?.data.filter(task=> task.status.toLocaleLowerCase()==state.toLowerCase())}/>
+          <TasksGroup key={i} title={state} bgColor={bgColors[i]} tasks={tasksList?.data.filter(task=> task.status?.toLocaleLowerCase()==state.toLowerCase())}/>
         ))}
 
       </div>

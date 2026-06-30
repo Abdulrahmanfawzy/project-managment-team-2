@@ -9,7 +9,7 @@ function Router() {
     <Routes>
       <Route path='/' element={<DashboardLayout/>}>
         <Route  index element={<p>Home Page</p>} />
-        <Route  path="/tasks" element={<TasksPage />} />
+        <Route  path="/task" element={<TasksPage />} />
       </Route>
     </Routes>
   )

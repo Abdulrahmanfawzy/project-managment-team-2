@@ -1,0 +1,82 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 24px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.card-header h3 { font-size: 16px; font-weight: 600; margin: 0; }
+.card-header span { font-size: 12px; color: #6b7280; cursor: pointer; }
+
+/* Tasks */
+.task-item { margin-bottom: 16px; }
+.task-title { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+.task-date { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+.progress-bar { height: 6px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.progress { height: 100%; border-radius: 4px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 12px; }
+.tag.high { background: #fee2e2; color: #b91c1c; }
+.tag.medium { background: #fef3c7; color: #b45309; }
+.tag.low { background: #dcfce7; color: #15803d; }
+
+/* Teams */
+.team-member { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: #ddd; object-fit: cover; }
+.team-info { flex: 1; }
+.team-name { font-size: 13px; }
+.team-tasks { font-size: 12px; color: #6b7280; }
+.team-progress { width: 60px; height: 4px; background: #e5e7eb; border-radius: 2px; }
+.team-progress > div { height: 100%; background: #4f46e5; border-radius: 2px; }
+
+/* Meetings */
+.meeting-item { margin-bottom: 16px; }
+.meeting-title { font-size: 14px; font-weight: 500; }
+.meeting-time { font-size: 12px; color: #6b7280; margin: 4px 0; }
+.avatars { display: flex; }
+.avatars .avatar { width: 24px; height: 24px; margin-left: -8px; border: 2px solid #fff; }
+
+/* Ask AI */
+.ai-box { background: #f9fafb; border-radius: 12px; padding: 12px; font-size: 13px; color: #6b7280; margin-bottom: 10px; }
+.ai-input { display: flex; gap: 8px; }
+.ai-input input { flex: 1; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; font-size: 13px; }
+.ai-input button { background: #4f46e5; border: none; color: #fff; border-radius: 8px; padding: 0 12px; cursor: pointer; }
+
+/* Loading & Error */
+.center { display: flex; align-items: center; justify-content: center; height: 100vh; }
+
+@media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 24px;
+  background-color: #f5f7fa;
+  /* min-height: 100vh; <-- امسحي السطر ده خالص */
+  align-items: start; /* 1. خلي الكروت تبدأ من فوق بس */
+  font-family: 'Inter', sans-serif;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  height: fit-content; /* 2. خلي طول الكارت على قد المحتوى بس */
+}

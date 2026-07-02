@@ -25,11 +25,55 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import Loader from "./shared/Loader";
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "sonner";
 
 export default function ResetPassword({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+
+  const [userData, setUserData] = useState({
+    email: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+
+  // Signup Request Api Function
+  async function handleForgettenPassword(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("email", userData.email);
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `${baseUrl}/forgot-password`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+     const successMsg = response.data.message;
+      toast.success(successMsg, { position: "bottom-left" });
+      window.setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    } catch (error) {
+      toast.error(error.response.data.message, { position: "bottom-left" });
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <>
       <AuthPagesNav />
@@ -101,6 +145,8 @@ export default function ResetPassword({
                     <Input
                       id="email"
                       type="email"
+                      value={userData.email}
+                      onChange={(e)=>{setUserData({"email":e.target.value})}}
                       placeholder="Your Email"
                       required
                       className="ps-10 pe-3 py-6  placeholder:text-mutedText"
@@ -113,8 +159,10 @@ export default function ResetPassword({
                     <Button
                       type="submit"
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
+                      onClick={(e) => handleForgettenPassword(e)}
                     >
                       reset password
+                      {loading && <Loader sizeNum={5} />}
                     </Button>
                     <FieldDescription className="text-center">
                       Remember your password?{" "}

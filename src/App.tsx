@@ -13,9 +13,9 @@ export default function App() {
   // const { t } = useTranslation();
   return (
     <>
-      <Login/>
+      {/* <Login/> */}
       {/* <Signup /> */}
-      {/* <ResetPassword/> */}
+      <ResetPassword/>
       {/* <ProfilePage/> */}
       {/* <Router/> */}
       {/* <CalendarProvider>

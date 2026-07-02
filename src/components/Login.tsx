@@ -1,4 +1,5 @@
 // Icons Lib
+import { setToken ,getToken} from "./authServices";
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
@@ -59,6 +60,8 @@ export default function Login({
            "Content-Type": "multipart/form-data",
          },
        });
+       const token = response.data.data.token;
+       setToken(token)
        toast.success(
          "Welcome Back !",
          { position: "bottom-left" },

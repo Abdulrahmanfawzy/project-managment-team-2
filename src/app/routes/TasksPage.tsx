@@ -8,6 +8,7 @@ import { useState } from "react";
 import { ToastContainer} from 'react-toastify';
 import { useTasksQuery } from "@/features/tasks/hooks/useTasksQuery";
 import TasksGroupSkeleton from "@/features/tasks/components/TasksGroupSkeleton";
+import { BugReportForm } from "@/features/tasks/components/UpdateTaskDialog";
 
 function TasksPage() {
 
@@ -21,7 +22,7 @@ function TasksPage() {
 
 
   return (
-    <div className="max-w-7xl mx-auto bg-background py-5 max-lg:px-5">
+    <div className="max-w-7xl mx-auto bg-background py-5 max-lg:px-5">      
       <div className="flex justify-between items-center mb-5">
         <div className=" flex gap-4">
           <SearchDemo />

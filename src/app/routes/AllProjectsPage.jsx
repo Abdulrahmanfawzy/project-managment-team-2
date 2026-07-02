@@ -5,14 +5,17 @@ import {
   Users,
   ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Dropdown from "../../components/Dropdown";
 import NewProjectModal from "../../components/NewProjectModal";
 import Projectbref from "../../components/Projectbref";
-import Overview from "./Overview";
+import Overview from "../../components/AllProjectsPage/Overview";
+import Tasks from "../../components/AllProjectsPage/Tasks";
+import Teams from "../../components/AllProjectsPage/teams/Teams";
+import FilesTab from "../../components/AllProjectsPage/FilesTab";
 
 export default function AllProjectsPage() {
-  // Use States
   let [isOpen, setIsOpen] = useState(false);
   let [is2Open, setIs2Open] = useState(false);
   // Selected Projects For Select
@@ -23,33 +26,44 @@ export default function AllProjectsPage() {
   let [isModalOpen, setIsModalOpen] = useState(false);
   let [selectedPage, setSelectedPage] = useState("all projects");
   let [selectedProject, setSelectedProject] = useState("");
-  let [projectsData, setProjects] = useState([
-    {
-      id: 1,
-      projectName: "Alpha Platform",
-      startDate: "2026-03-01",
-      deadline: "2026-06-15",
-      status: "Active",
-      filesCount: 22,
-      team: ["Ahmed", "Sara", "Ali"],
-      priority: "High",
-    },
-    {
-      id: 2,
-      projectName: "SepetGo E-Commerce",
-      startDate: "2026-01-10",
-      deadline: "2026-04-20",
-      status: "Done",
-      filesCount: 15,
-      team: ["Omar", "Mona"],
-      priority: "Medium",
-    },
-  ]);
+
+  // API Data
+  let [projectsData, setProjects] = useState([]);
+  let [loading, setLoading] = useState(true);
+  let [error, setError] = useState(null);
+  
+  useEffect( ()=> {
+    const fetchProjects = async() => {
+      try{
+        setLoading(true)
+        const response = await axios.get('https://collabspace-team-one.newcinderella.online/api/projects', 
+          {
+            headers:{
+              Authorization: `Bearer 8|3RvEjkCc9qKsuZcwLkjrrMrdeuSGHklTIO4Gm6xZb1247378`
+            }
+          }
+        )
+
+        if (response.data) {
+          const fetchedData = response.data.data ;
+          setProjects(Array.isArray(fetchedData) ? fetchedData : []);
+        }
+        setError(null)
+      }catch(error){
+        console.error("Error fetching projects:", error)
+        setError("فشل في تحميل المشاريع من السيرفر.");
+      } finally {
+        setLoading(false);
+      }
+
+    }
+    fetchProjects();
+  },[])
 
   // FIlter Projects By Search
 
   let searchProjects = projectsData.filter((project) => {
-    return project.projectName
+    return project.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
   });
@@ -58,28 +72,33 @@ export default function AllProjectsPage() {
 
   let filteredProjects = searchProjects.filter((project) => {
     if (selectedProjectSelect === "All Projects") return true;
-    return selectedProjectSelect === project.projectName;
+    return selectedProjectSelect === project.name;
   });
 
   // Filter Projects by Date
   let sortedAndFilteredProjects = filteredProjects.slice().sort((a, b) => {
     if (sortBy === "newest") {
-      return new Date(b.startDate) - new Date(a.startDate); // الأحدث أولاً
+      return new Date(b.start_date) - new Date(a.start_date); // الأحدث أولاً
     } else {
-      return new Date(a.startDate) - new Date(b.startDate); // الأقدم أولاً
+      return new Date(a.start_date) - new Date(b.start_date); // الأقدم أولاً
     }
   });
 
   const statusColors = {
-    Done: "text-green-600 ",
-    Active: "text-blue-600",
-  };
+  pending: "text-yellow-600",
+  in_progress: "text-blue-600",
+  completed: "text-green-600",
+};
 
+  const priorityColors = {
+  low: "text-green-600",
+  medium: "text-yellow-600",
+  high: "text-red-600",
+};
   return (
     <>
       <div className="bg-gray-100 min-h-screen pt-10">
         <div className="flex flex-col w-11/12 m-auto">
-          {/* بداية الشرط بتاعك */}
           {selectedPage === "all projects" && (
             <>
               <div className="flex justify-between items-center">
@@ -141,8 +160,8 @@ export default function AllProjectsPage() {
                   {is2Open && (
                     <Dropdown
                       projectsData={[
-                        { projectName: "newest" },
-                        { projectName: "oldest" },
+                        { name: "newest" },
+                        { name: "oldest" },
                       ]}
                       setSelectedProjectSelect={setSortBy}
                       setIsOpen={setIs2Open}
@@ -175,33 +194,32 @@ export default function AllProjectsPage() {
                     >
                       <td className="p-3 flex gap-1 items-center text-black">
                         <BriefcaseBusiness />
-                        {project.projectName}
+                        {project.name}
                       </td>
-                      <td>{project.startDate}</td>
-                      <td>{project.deadline}</td>
+                      <td>{project.start_date}</td>
+                      <td>{project.deadline || "No Deadline"}</td>
                       <td className={`${statusColors[project.status]}`}>
                         {project.status}
                       </td>
                       <td>
                         <div className="flex items-center">
                           <File className="text-yellow-300 text-xs" />
-                          {project.filesCount} Files
+                          {project.filesCount || "none"} Files
                         </div>
                       </td>
                       <td>
                         <div className="flex items-center">
                           <Users size={20} strokeWidth={2} />
-                          {project.team.join(", ")}
+                          {project.team?.join(", ") || "No Team"}
                         </div>
                       </td>
-                      <td>{project.priority}</td>
+                      <td className={`${priorityColors[project.priority]}`}>{project.priority}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </>
           )}
-          {/* قفلنا القوس هنا بعد الجدول بالظبط عشان يختفي مع باقي العناصر اللّي فوق */}
 
           {/* Open pages */}
           {selectedPage !== "all projects" && (
@@ -212,6 +230,9 @@ export default function AllProjectsPage() {
                 selectedPage={selectedPage}
               />
               {selectedPage === "overview" && <Overview />}
+              {selectedPage === "tasks" && <Tasks />}
+              {selectedPage === "teams" && <Teams />}
+              {selectedPage === "files" && <FilesTab />}
             </>
           )}
         </div>

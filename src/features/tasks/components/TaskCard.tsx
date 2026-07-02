@@ -4,21 +4,28 @@ import { ProgressWithLabel } from "./Progress";
 import type { Ttask } from "../types/types";
 import { DeleteDialog } from "./AlertDialog";
 import { useState } from "react";
+import { BugReportForm } from "./UpdateTaskDialog";
+// import { UpdateTaskDialog } from "./UpdateTaskDialog";
 
 
 
 function TaskCard({id, title, description, priority, progress, start_date}: Ttask) {
-    const [open, setOpen] = useState(false);
+    const [openNew, setOpenNew] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
     return (
         <div className="bg-gray-100 rounded-2xl p-3  shadow-md w-full flex flex-col justify-between h-55 relative">
 
-            <DeleteDialog open={open} setOpen={setOpen} id={id}/>
+            <DeleteDialog open={openNew} setOpen={setOpenNew} id={id}/>
+
+            <BugReportForm open={openEdit} setOpen={setOpenEdit} id={id}/>
+
+            {/* <UpdateTaskDialog open={openEdit} setOpen={setOpenEdit} id={id}/> */}
 
             <div className="flex justify-between items-center">
                 <h3 className="text-black">{title}</h3>
                 <div className="flex gap-3">
-                    <SquarePen className="h-4 w-4 text-blue-400  cursor-pointer" />
-                    <Trash2 onClick={()=> setOpen(true)} className="h-4 w-4 text-red-400  cursor-pointer" />
+                    <SquarePen onClick={()=> setOpenEdit(true)}  className="h-4 w-4 text-blue-400  cursor-pointer" />
+                    <Trash2 onClick={()=> setOpenNew(true)} className="h-4 w-4 text-red-400  cursor-pointer" />
                 </div>
             </div>
 

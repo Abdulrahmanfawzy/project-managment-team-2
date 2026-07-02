@@ -4,7 +4,11 @@ export const taskSchema = z.object({
     title: z.string().min(3, "Task name must be at least 3 characters long"),
     description: z.string().min(5, "Task description must be at least 5 characters long"),
     // start_date: z.string('Start date is required'),
-    start_date: z.date('Start date is required'),
+    // start_date: z.date('Start date is required'),
+    start_date: z.union([
+        z.date(),
+        z.string().min(1, 'Start date is required')
+    ]),
     due_date: z.date('End date is required'),
     // guests: z.string().min(3, "Guest name must be at least 3 characters long").optional(),
     // guests: z.string().refine((val) => val === "" || val.length >= 3,"Guest name must be at least 3 characters long").optional(),
@@ -22,3 +26,15 @@ export const taskSchema = z.object({
     }),
     progress: z.number().min(0, "Progress must be at least 0").max(100, "Progress cannot exceed 100").optional()
 });
+
+export const UpdateTaskSchema = z.object({
+    title: z.string().min(3, "Task name must be at least 3 characters long"),
+    description: z.string().min(5, "Task description must be at least 5 characters long"),
+    priority: z.enum(["low", "medium", "high", "critical"], {
+        message: "select a valid priority"
+    }),
+    status: z.enum(["pending", "in_progress", "in_review", "completed"], {
+        message: "select a valid status"
+    }),
+    // progress: z.number().min(0, "Progress must be at least 0").max(100, "Progress cannot exceed 100").optional()
+})

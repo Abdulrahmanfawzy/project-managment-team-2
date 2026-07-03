@@ -6,13 +6,13 @@ import { EventModal } from "./event-modal"; // تأكد من اسم الملف �
 export default function CalendarPage() {
   return (
     <CalendarProvider>
-      <div className="max-w-7xl mx-auto p-6">
+      <section className="mainContainer py-5">
         <CalendarHeader />
         <CalendarBody />
 
         {/* المودال لازم يكون هنا عشان يستقبل الـ state */}
         <EventModal />
-      </div>
+      </section>
     </CalendarProvider>
   );
 }

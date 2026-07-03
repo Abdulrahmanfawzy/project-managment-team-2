@@ -14,19 +14,19 @@ import {
   type Mode,
 } from "./calendar-types";
 
-// 1. بيانات تجريبية للتجربة (Mock Data)
+// Mock Data
 const MOCK_EVENTS: CalendarEvent[] = [
   {
     id: "1",
     title: "Design Review",
-    start: new Date(2026, 5, 27, 9, 0), // (يونيو 27، 2026 الساعة 9:00 صباحاً)
-    end: new Date(2026, 5, 27, 9, 30),
+    start: new Date(2026, 6, 28, 9, 0),
+    end: new Date(2026, 6, 28, 9, 30),
   },
   {
     id: "2",
     title: "Alignment Meeting",
-    start: new Date(2026, 5, 27, 13, 0),
-    end: new Date(2026, 5, 27, 13, 30),
+    start: new Date(2026, 6, 29, 13, 0),
+    end: new Date(2026, 6, 29, 13, 30),
   },
 ];
 

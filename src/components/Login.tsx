@@ -2,7 +2,6 @@
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
-
 //=== Icons Lib===
 import AuthPagesNav from "./AuthPagesNav";
 import { cn } from "@/lib/utils";
@@ -24,11 +23,57 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import Loader from "./shared/Loader";
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "sonner";
 
 export default function Login({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+ 
+
+   const [userData, setUserData] = useState({
+     email: "",
+     password: "",
+   });
+   
+   const [loading, setLoading] = useState(false);
+   const baseUrl = import.meta.env.VITE_API_URL;
+   const navigate = useNavigate();
+
+   // Login Request Api Function
+   async function loginMethod(e) {
+     e.preventDefault();
+     const formData = new FormData();
+     formData.append("email", userData.email);
+     formData.append("password", userData.password);
+     
+     setLoading(true);
+     try {
+       const response = await axios.post(`${baseUrl}/login`, formData, {
+         headers: {
+           "Content-Type": "multipart/form-data",
+         },
+       });
+       toast.success(
+         "Welcome Back !",
+         { position: "bottom-left" },
+       );
+       window.setTimeout(() => {
+         navigate("/dashboard");
+       }, 1000);
+     } catch (error) {
+       toast.error(error.response.data.message, { position: "bottom-left" });
+     } finally {
+       setLoading(false);
+     }
+   }
+
+
   return (
     <>
       <AuthPagesNav />
@@ -98,6 +143,10 @@ export default function Login({
                     <Input
                       id="email"
                       type="email"
+                      value={userData.email}
+                      onChange={(e) => {
+                        setUserData({ ...userData, email: e.target.value });
+                      }}
                       placeholder="Your Email"
                       required
                       className="ps-10 pe-3 py-6    placeholder:text-mutedText"
@@ -115,6 +164,10 @@ export default function Login({
                     <Input
                       id="password"
                       type="Password"
+                      value={userData.password}
+                      onChange={(e) => {
+                        setUserData({ ...userData, password: e.target.value });
+                      }}
                       placeholder="Password"
                       required
                       className="ps-10 pe-3 py-6 placeholder:text-mutedText"
@@ -152,9 +205,11 @@ export default function Login({
                   <Field>
                     <Button
                       type="submit"
+                      onClick={(e)=>loginMethod(e)}
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                     >
                       Log in
+                      {loading && <Loader sizeNum={5} />}
                     </Button>
                     <FieldDescription className="text-center">
                       Don&apos;t have an account yet?{" "}

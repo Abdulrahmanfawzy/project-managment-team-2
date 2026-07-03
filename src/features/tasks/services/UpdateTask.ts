@@ -1,12 +1,13 @@
 import axios from "axios";
 import type { TnewTask } from "../types/types";
-import { token } from "@/constants/token";
+import { axiosInstance } from "@/constants/AxiosInstance";
+// import { token } from "@/constants/token";
 
-const base_url = import.meta.env.VITE_API_URL;
+// const base_url = import.meta.env.VITE_API_URL;
 
 export const updateTask= async(id:number, updatedData:{})=>{
     try {
-        const {data}= await axios.put(`${base_url}/tasks/${id}`, updatedData, {headers:{Authorization:`Bearer ${token}`}})
+        const {data}= await axiosInstance.put(`/tasks/${id}`, updatedData)
         console.log(data)
         return data;
     } catch (error) {

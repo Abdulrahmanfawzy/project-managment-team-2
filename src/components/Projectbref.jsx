@@ -11,13 +11,13 @@ export default function Projectbref({ project, selectedPage, setSelectedPage }) 
         <header className="flex justify-between items-center">
           <div>
             <div className="flex items-center gap-1">
-              <p className="text-sm">Projects</p>
+              <p className="text-sm cursor-pointer" onClick={()=>{setSelectedPage("all projects")}}>Projects</p>
               <ChevronRight size={18} strokeWidth={3} />
-              <p className="text-black text-sm">{project.projectName}</p>
+              <p className="text-black text-sm">{project.name}</p>
             </div>
             <div className="flex items-center gap-2">
               <h1 className="text-black font-bold text-lg">
-                {project.projectName}
+                {project.name}
               </h1>
               <p className="bg-green-200 rounded-2xl px-3 text-green-700">
                 42% Completed
@@ -28,7 +28,7 @@ export default function Projectbref({ project, selectedPage, setSelectedPage }) 
             <p className="text-black">DuE Date</p>
             <Progress value={65} className="" />
             <div className="flex flex-row gap-3">
-              <p>Tart Date: {project.startDate}</p>
+              <p>Tart Date: {project.start_date}</p>
               <p>Deadline: {project.deadline}</p>
             </div>
           </div>

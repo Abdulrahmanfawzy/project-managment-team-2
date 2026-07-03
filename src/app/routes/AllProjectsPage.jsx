@@ -8,13 +8,15 @@ import {
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dropdown from "../../components/Dropdown";
-import NewProjectModal from "../../components/AllProjectsPage/NewProjectModal";
+import NewProjectModal from "../../features/AllProjectsPage/NewProjectModal";
 import Projectbref from "../../components/Projectbref";
-import Overview from "../../components/AllProjectsPage/Overview";
-import Tasks from "../../components/AllProjectsPage/Tasks";
-import Teams from "../../components/AllProjectsPage/teams/Teams";
-import FilesTab from "../../components/AllProjectsPage/FilesTab";
-import AddProjectButton from "../../components/AllProjectsPage/AddProjectButton";
+import Overview from "../../features/AllProjectsPage/Overview";
+import Tasks from "../../features/AllProjectsPage/Tasks";
+import Teams from "../../features/AllProjectsPage/teams/Teams";
+import FilesTab from "../../features/AllProjectsPage/FilesTab";
+import AddProjectButton from "../../features/AllProjectsPage/AddProjectButton";
+import Navbar from "../../components/shared/Navbar"
+
 
 export default function AllProjectsPage() {
   let [isOpen, setIsOpen] = useState(false);
@@ -32,41 +34,39 @@ export default function AllProjectsPage() {
   let [projectsData, setProjects] = useState([]);
   let [loading, setLoading] = useState(true);
   let [error, setError] = useState(null);
-  
-  useEffect( ()=> {
-    const fetchProjects = async() => {
-      try{
-        setLoading(true)
-        const response = await axios.get('https://collabspace-team-one.newcinderella.online/api/projects', 
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(
+          "https://collabspace-team-one.newcinderella.online/api/projects",
           {
-            headers:{
-              Authorization: `Bearer 8|3RvEjkCc9qKsuZcwLkjrrMrdeuSGHklTIO4Gm6xZb1247378`
-            }
-          }
-        )
+            headers: {
+              Authorization: `Bearer 8|3RvEjkCc9qKsuZcwLkjrrMrdeuSGHklTIO4Gm6xZb1247378`,
+            },
+          },
+        );
 
         if (response.data) {
-          const fetchedData = response.data.data ;
+          const fetchedData = response.data.data;
           setProjects(Array.isArray(fetchedData) ? fetchedData : []);
         }
-        setError(null)
-      }catch(error){
-        console.error("Error fetching projects:", error)
+        setError(null);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
         setError("فشل في تحميل المشاريع من السيرفر.");
       } finally {
         setLoading(false);
       }
-
-    }
+    };
     fetchProjects();
-  },[])
+  }, []);
 
   // FIlter Projects By Search
 
   let searchProjects = projectsData.filter((project) => {
-    return project.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
   });
 
   // Filter Projects By name
@@ -78,27 +78,31 @@ export default function AllProjectsPage() {
 
   // Filter Projects by Date
   let sortedAndFilteredProjects = filteredProjects.slice().sort((a, b) => {
+    const dateA = a.start_date ? new Date(a.start_date) : new Date(0);
+    const dateB = b.start_date ? new Date(b.start_date) : new Date(0);
+
     if (sortBy === "newest") {
-      return new Date(b.start_date) - new Date(a.start_date); // الأحدث أولاً
+      return dateB - dateA; // الأحدث أولاً
     } else {
-      return new Date(a.start_date) - new Date(b.start_date); // الأقدم أولاً
+      return dateA - dateB; // الأقدم أولاً
     }
   });
 
   const statusColors = {
-  pending: "text-yellow-600",
-  in_progress: "text-blue-600",
-  completed: "text-green-600",
-};
+    pending: "text-yellow-600",
+    in_progress: "text-blue-600",
+    completed: "text-green-600",
+  };
 
   const priorityColors = {
-  low: "text-green-600",
-  medium: "text-yellow-600",
-  high: "text-red-600",
-};
+    low: "text-green-600",
+    medium: "text-yellow-600",
+    high: "text-red-600",
+  };
   return (
     <>
-      <div className="bg-gray-100 min-h-screen pt-10">
+      <Navbar />
+      <div className="bg-gray-100 min-h-screen mt-2">
         <div className="flex flex-col w-11/12 m-auto">
           {selectedPage === "all projects" && (
             <>
@@ -147,7 +151,10 @@ export default function AllProjectsPage() {
                   {/* Dropdown */}
                   {isOpen && (
                     <Dropdown
-                      projectsData={projectsData}
+                      projectsData={[
+                        { id: "allprojects", name: "All Projects" },
+                        ...projectsData,
+                      ]}
                       setSelectedProjectSelect={setSelectedProjectSelect}
                       setIsOpen={setIsOpen}
                     />
@@ -156,8 +163,8 @@ export default function AllProjectsPage() {
                   {is2Open && (
                     <Dropdown
                       projectsData={[
-                        { name: "newest" },
-                        { name: "oldest" },
+                        { id: "newest", name: "newest" },
+                        { id: "oldest", name: "oldest" },
                       ]}
                       setSelectedProjectSelect={setSortBy}
                       setIsOpen={setIs2Open}
@@ -209,7 +216,9 @@ export default function AllProjectsPage() {
                           {project.team?.join(", ") || "No Team"}
                         </div>
                       </td>
-                      <td className={`${priorityColors[project.priority]}`}>{project.priority}</td>
+                      <td className={`${priorityColors[project.priority]}`}>
+                        {project.priority}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -225,10 +234,10 @@ export default function AllProjectsPage() {
                 setSelectedPage={setSelectedPage}
                 selectedPage={selectedPage}
               />
-              {selectedPage === "overview" && <Overview />}
-              {selectedPage === "tasks" && <Tasks />}
-              {selectedPage === "teams" && <Teams />}
-              {selectedPage === "files" && <FilesTab />}
+              {selectedPage === "overview" && <Overview project={selectedProject} />}
+              {selectedPage === "tasks" && <Tasks projectId={selectedProject.id} />}
+              {selectedPage === "teams" && <Teams projectId={selectedProject.id} />}
+              {selectedPage === "files" && <FilesTab project={selectedProject} />}
             </>
           )}
         </div>

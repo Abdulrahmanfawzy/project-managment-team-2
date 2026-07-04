@@ -97,13 +97,13 @@ const DropdownProfileMenu = ({ ...props }) => {
             <DropdownMenuItem>
             <Link to="/cart" className="flex gap-1 items-center hover:text-theme">
                 <ShoppingBag />
-                My Order
+                Tasks
             </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
             <Link to="/wishlist" className="flex gap-1 hover:text-theme">
                 <Star />
-                My Reviews
+                Reports
             </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>

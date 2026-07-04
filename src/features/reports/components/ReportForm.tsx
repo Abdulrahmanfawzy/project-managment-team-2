@@ -32,6 +32,7 @@ import { DateInput } from "@/features/tasks/components/dialog/DateInput"
 import { reportSchema } from "../schema/schema"
 import type z from "zod"
 import { Astroid } from "lucide-react"
+import useCreateReport from "../hooks/useCreateReport"
 
 
 export function ReportForm() {
@@ -44,21 +45,11 @@ export function ReportForm() {
         },
     })
 
+    const createReportMutation = useCreateReport()
+    
     function onSubmit(data: z.infer<typeof reportSchema>) {
-        toast("You submitted the following values:", {
-        description: (
-            <pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
-            <code>{JSON.stringify(data, null, 2)}</code>
-            </pre>
-        ),
-        position: "bottom-right",
-        classNames: {
-            content: "flex flex-col gap-2",
-        },
-        style: {
-            "--border-radius": "calc(var(--radius)  + 4px)",
-        } as React.CSSProperties,
-        })
+        console.log(data)
+        createReportMutation.mutate(data)
     }
 
     return (
@@ -73,7 +64,7 @@ export function ReportForm() {
             <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
                 <FieldGroup>
                     <Controller
-                    name="type"
+                    name="report_type"
                     control={form.control}
                     render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
@@ -129,7 +120,7 @@ export function ReportForm() {
                         />
 
                         <Controller
-                        name="due_date"
+                        name="end_date"
                         control={form.control}
                         render={({ field, fieldState }) => (
                             <Field data-invalid={fieldState.invalid}>

@@ -12,7 +12,6 @@ function Router() {
   return (
     <Routes>
       {/* <Route path="/auth" element={<AuthLayout />}> */}
-      {/* </Route> */}
       <Route path="/login" element={<Login />}></Route>
       <Route path="/signup" element={<Signup />}></Route>
       <Route path="/" element={<DashboardLayout />}>
@@ -22,7 +21,6 @@ function Router() {
         <Route path="/projects" element={<AllProjectsPage/>} />
       </Route>
     </Routes>
-  );
+  )
 }
-
 export default Router

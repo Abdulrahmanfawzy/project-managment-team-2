@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input"
 import { useCreateTask } from "../hooks/useCreateTask"
 import { PriorityToggleGroup } from "./dialog/PriorityGroup"
 import { StatusToggleGroup } from "./dialog/StatusGroup"
+import { Textarea } from "@/components/ui/textarea"
 
 export function TasksDialog({open, setOpen}:{open: boolean, setOpen:(open: boolean) => void}) {
     
@@ -62,7 +63,8 @@ export function TasksDialog({open, setOpen}:{open: boolean, setOpen:(open: boole
                             <p className="text-sm text-destructive">{errors.title?.message}</p>
                         </div>
                         <div>
-                            <Input {...register("description")} className="bg-blue-300" placeholder="Task Description"/>
+
+                            <Textarea  {...register("description")} className="bg-blue-300 h-25 resize-none" placeholder="Task Description"/>
                             <p className="text-sm text-destructive">{errors.description?.message}</p>
                         </div>
                         <div className="flex gap-5">

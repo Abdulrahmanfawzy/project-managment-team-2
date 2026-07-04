@@ -57,9 +57,9 @@ export type TnewTask = {
     project_id: number;
     title: string;
     description: string;
-    start_date: Date;
+    start_date: Date|string| null;
     status: string;
-    due_date?: Date | null;
+    due_date?: Date | string | null;
     priority?: string;
     guests?: string;
     porogress?: number;

@@ -18,7 +18,7 @@ import AddProjectButton from "../../features/AllProjectsPage/AddProjectButton";
 import Navbar from "../../components/shared/Navbar"
 
 
-export default function AllProjectsPage() {
+function AllProjectsPage() {
   let [isOpen, setIsOpen] = useState(false);
   let [is2Open, setIs2Open] = useState(false);
   // Selected Projects For Select
@@ -245,3 +245,5 @@ export default function AllProjectsPage() {
     </>
   );
 }
+
+export default AllProjectsPage;

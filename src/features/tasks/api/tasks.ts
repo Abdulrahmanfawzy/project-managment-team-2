@@ -61,17 +61,21 @@
 //     ]
 // export default tasksList
 
-import { token } from "@/constants/token";
-import axios from "axios";
+import { axiosInstance } from "@/constants/AxiosInstance";
 import type { Ttasks } from "../types/types";
+// import { token } from "@/constants/token";
+// import axios from "axios";
+// import type { Ttasks } from "../types/types";
 
-const base_url = import.meta.env.VITE_API_URL;
+// const base_url = import.meta.env.VITE_API_URL;
 
-export const getAllTasks= async()=>{
+const getAllTasks= async()=>{
     try {
-        const {data}:{data:Ttasks}= await axios.get(`${base_url}/tasks`, {headers:{Authorization: `Bearer ${token}`}})
+        const {data}:{data:Ttasks}= await axiosInstance.get(`/tasks`)
+        
         return data
     } catch (error) {
         throw error
     }
 } 
+export default getAllTasks

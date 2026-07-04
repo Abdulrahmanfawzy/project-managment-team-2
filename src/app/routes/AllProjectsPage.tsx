@@ -5,6 +5,7 @@ import {
   Users,
   ChevronDown,
 } from "lucide-react";
+<<<<<<< HEAD:src/app/routes/AllProjectsPage.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Dropdown from "../../components/Dropdown";
@@ -16,6 +17,13 @@ import Teams from "../../features/AllProjectsPage/teams/Teams";
 import FilesTab from "../../features/AllProjectsPage/FilesTab";
 import AddProjectButton from "../../features/AllProjectsPage/AddProjectButton";
 import Navbar from "../../components/shared/Navbar"
+=======
+import { useState } from "react";
+// import Dropdown from "../../components/Dropdown";
+// import NewProjectModal from "../../components/NewProjectModal";
+// import Projectbref from "../../components/Projectbref";
+// import Overview from "./Overview";
+>>>>>>> bd80282 (feat(auth): implement OTP verification and reset password functionality with new components and routing):src/app/routes/AllProjectsPage.tsx
 
 
 function AllProjectsPage() {

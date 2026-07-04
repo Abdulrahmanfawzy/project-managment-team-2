@@ -1,17 +1,17 @@
 import { Button } from "@/components/ui/button"
 import { EllipsisVertical, Plus } from "lucide-react"
 import TaskCard from "./TaskCard"
-import type { ITask } from "../interfaces";
 import { TasksDialog } from "./NewTaskDialog";
 import { useState } from "react";
+import type { Ttask, Ttasks } from "../types/types";
 
 interface IProps{   
     title:string;
     bgColor?:string;
-    tasks?: ITask[]
+    tasks?: Ttask[]
 }
 
-function TasksGroup({title, bgColor, tasks}:IProps) {
+function TasksGroup({title, bgColor, tasks,}:IProps) {
 
     const [open, setOpen] = useState(false);
 

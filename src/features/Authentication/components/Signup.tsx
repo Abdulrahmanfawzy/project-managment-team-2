@@ -4,7 +4,7 @@ import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
 import { User } from "lucide-react";
 //=== Icons Lib===
-import AuthPagesNav from "./AuthPagesNav";
+import AuthPagesNav from "../../../components/shared/AuthPagesNav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,14 +25,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import Loader from "./shared/Loader";
+import Loader from "../../../components/shared/Loader";
 
 import { useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
 import { toast } from "sonner";
-
-
+import {RegisterRequest} from "../services/Requests"
+import {Link} from "react-router-dom"
 export default function Signup({
   className,
   ...props
@@ -42,40 +42,9 @@ export default function Signup({
   const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
-  // Signup Request Api Function
-  async function registerMethod(e) {
-    e.preventDefault();
-    
-    const formData= new FormData()
-    formData.append("name",userData.name)
-    formData.append("email",userData.email)
-    formData.append("password",userData.password)
-    formData.append("password_confirmation",userData.password_confirmation);
-    setLoading(true);
-    try{
-      const response = await axios.post(`${baseUrl}/register`,formData,{
-        headers:{
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      toast.success(
-        "Congratulations! Your account has been successfully created.",
-        {position:"bottom-left"}
-      );
-      window.setTimeout(()=>{
-       navigate("/login");
-      },1000)
-    }catch(error){
-      toast.error(error.response.data.message, { position: "bottom-left" });
-    }finally{
-      setLoading(false);
-    }
-    
-  }
   return (
     <>
       <AuthPagesNav />
-
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
           className={cn("flex flex-col gap-6 w-full md:w-lg py-5", className)}
@@ -212,19 +181,19 @@ export default function Signup({
                     {/*=== CheckBox ===*/}
 
                     {/* Forgot Password Link */}
-                    <a
-                      href="#"
+                    <Link
+                      to="/forgetPass"
                       className="ml-auto text-sm underline-offset-4 hover:underline text-brand whitespace-nowrap"
                     >
                       Forgot your password?
-                    </a>
+                    </Link>
                     {/*=== Forgot Password Link ===*/}
                   </section>
 
                   <Field>
                     <Button
                       type="submit"
-                      onClick={(e) => registerMethod(e)}
+                      onClick={(e) => RegisterRequest(e,userData,setLoading,navigate)}
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                     >
                       sign up
@@ -233,12 +202,12 @@ export default function Signup({
                     <FieldDescription className="text-center">
                       Don&apos;t have an account yet?{" "}
                       {/* ####### Here We Can But Link Tag ######### */}
-                      <a
-                        href="#"
+                      <Link
+                        to="/signin"
                         className="text-brand decoration-0 font-semibold"
                       >
                         Sign In
-                      </a>
+                      </Link>
                     </FieldDescription>
                   </Field>
                 </FieldGroup>

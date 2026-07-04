@@ -1,6 +1,6 @@
 import {useState,useEffect} from "react";
 // import { Link} from "react-router-dom";
-import LangSwitcher from "./shared/lang-switcher";
+import LangSwitcher from "./lang-switcher";
 const Nav = ({
   linksState = false,
   searchBarState = false,

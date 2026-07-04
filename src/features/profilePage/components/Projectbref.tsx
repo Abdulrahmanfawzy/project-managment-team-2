@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react";
-import { Progress } from "./ui/progress";
+import { Progress } from "../../../components/ui/progress";
 
 export default function Projectbref({ project, selectedPage, setSelectedPage }) {
   

@@ -3,7 +3,6 @@ import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
 import { User } from "lucide-react";
-
 //=== Icons Lib===
 import AuthPagesNav from "./AuthPagesNav";
 import { cn } from "@/lib/utils";
@@ -22,18 +21,61 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field";
+
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import Loader from "./shared/Loader";
+
+import { useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom"
+import axios from "axios";
+import { toast } from "sonner";
 
 
 export default function Signup({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [userData,setUserData] = useState({"name":"","email":"","password":"","password_confirmation":""})
+  const [loading,setLoading] = useState(false)
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
+
+  // Signup Request Api Function
+  async function registerMethod(e) {
+    e.preventDefault();
+    
+    const formData= new FormData()
+    formData.append("name",userData.name)
+    formData.append("email",userData.email)
+    formData.append("password",userData.password)
+    formData.append("password_confirmation",userData.password_confirmation);
+    setLoading(true);
+    try{
+      const response = await axios.post(`${baseUrl}/register`,formData,{
+        headers:{
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      toast.success(
+        "Congratulations! Your account has been successfully created.",
+        {position:"bottom-left"}
+      );
+      window.setTimeout(()=>{
+       navigate("/login");
+      },1000)
+    }catch(error){
+      toast.error(error.response.data.message, { position: "bottom-left" });
+    }finally{
+      setLoading(false);
+    }
+    
+  }
   return (
     <>
       <AuthPagesNav />
+
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
           className={cn("flex flex-col gap-6 w-full md:w-lg py-5", className)}
@@ -94,6 +136,10 @@ export default function Signup({
                     />
                     <Input
                       id="Name"
+                      value={userData.name}
+                      onChange={(e) => {
+                        setUserData({ ...userData, name: e.target.value });
+                      }}
                       type="text"
                       placeholder="Full Name"
                       required
@@ -112,6 +158,10 @@ export default function Signup({
                     <Input
                       id="email"
                       type="email"
+                      value={userData.email}
+                      onChange={(e) => {
+                        setUserData({ ...userData, email: e.target.value });
+                      }}
                       placeholder="Your Email"
                       required
                       className="ps-10 pe-3 py-6  placeholder:text-mutedText"
@@ -129,6 +179,14 @@ export default function Signup({
                     <Input
                       id="password"
                       type="Password"
+                      value={userData.password}
+                      onChange={(e) => {
+                        setUserData({
+                          ...userData,
+                          password: e.target.value,
+                          password_confirmation: e.target.value,
+                        });
+                      }}
                       placeholder="Password"
                       required
                       className="ps-10 pe-3 py-6 placeholder:text-mutedText"
@@ -166,9 +224,11 @@ export default function Signup({
                   <Field>
                     <Button
                       type="submit"
+                      onClick={(e) => registerMethod(e)}
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                     >
-                      Log in
+                      sign up
+                      {loading && <Loader sizeNum={5} />}
                     </Button>
                     <FieldDescription className="text-center">
                       Don&apos;t have an account yet?{" "}

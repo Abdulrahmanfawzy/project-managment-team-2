@@ -15,7 +15,7 @@ import Tasks from "../../components/AllProjectsPage/Tasks";
 import Teams from "../../components/AllProjectsPage/teams/Teams";
 import FilesTab from "../../components/AllProjectsPage/FilesTab";
 
-export default function AllProjectsPage() {
+function AllProjectsPage() {
   let [isOpen, setIsOpen] = useState(false);
   let [is2Open, setIs2Open] = useState(false);
   // Selected Projects For Select
@@ -95,6 +95,7 @@ export default function AllProjectsPage() {
   medium: "text-yellow-600",
   high: "text-red-600",
 };
+
   return (
     <>
       <div className="bg-gray-100 min-h-screen pt-10">
@@ -240,3 +241,5 @@ export default function AllProjectsPage() {
     </>
   );
 }
+
+export default AllProjectsPage;

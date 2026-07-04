@@ -9,13 +9,17 @@ import Layout from "./components/layout/dashboardLayout"
 import { CalendarProvider } from "./calendar/calendar-context";
 import AlertModal from "./components/shared/AlertModal";
 import { Toaster } from "@/components/ui/sonner"; // اتأكد إن المسار صح
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // const { t } = useTranslation();
 export default function App() {
   // const { t } = useTranslation();
   const queryClient = new QueryClient()
   return (
     <>
-      <Login/>
+     <QueryClientProvider client={queryClient}>
+      <Router/>
+     </QueryClientProvider>
+      {/* <Login/> */}
       {/* <Signup /> */}
       {/* <ResetPassword/> */}
       {/* <ProfilePage/> */}
@@ -23,7 +27,7 @@ export default function App() {
       {/* <CalendarProvider>
         <Calendar />
        </CalendarProvider> */}
-      <Toaster richColors position="top-right" />
+      {/* <Toaster richColors position="top-right" /> */}
     </>
   );
 }

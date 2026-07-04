@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // // createBrowserRouter (Routes only)
 
 // import { Routes,  Route} from "react-router"
@@ -30,13 +31,30 @@ import {
   VerifyOTP,
   ResetPasswordPage,
 } from "./routes/AllDashboardPages";
+=======
+import {
+  ForgetPassPage,
+  LoginPage,
+  SignupPage,
+  VerifyOTP,
+  ResetPasswordPage,
+} from "./routes/AllDashboardPages";
+
+
+import {removeToken} from "../cookies/authServices";
+removeToken()
+>>>>>>> main
 import {
   ProfilePageData,
   ProfileTasksPage,
   ProfileFilesPage,
   ProfileAboutPage,
   Error,
+<<<<<<< HEAD
   Dashboard,
+=======
+  DashboardPage,
+>>>>>>> main
   AllProjects,
 } from "./routes/AllDashboardPages";
 import { Calendar } from "./routes/AllDashboardPages";
@@ -76,11 +94,19 @@ export const Router = createBrowserRouter([
         children: [
           {
             index: true,
+<<<<<<< HEAD
             element: <Dashboard />,
           },
           {
             path: "dashboard",
             element: <Dashboard />,
+=======
+            element: <DashboardPage />,
+          },
+          {
+            path: "dashboard",
+            element: <DashboardPage />,
+>>>>>>> main
           },
           {
             path: "AllProjects",
@@ -128,4 +154,8 @@ export const Router = createBrowserRouter([
       },
     ],
   },
+<<<<<<< HEAD
 ]);
+=======
+]);
+>>>>>>> main

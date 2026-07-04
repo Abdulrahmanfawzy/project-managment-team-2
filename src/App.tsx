@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {Router} from "./app/index";
+>>>>>>> main
 // import Router from "./app/index";
 import Nav from "./components/shared/AuthPagesNav";
 import Login from "./features/Authentication/components/Login";
@@ -9,10 +14,15 @@ import { CalendarProvider } from "./features/AddMettingPage/components/calendar/
 import Projectbref from "./features/profilePage/components/Projectbref";
 import AlertModal from "./components/shared/AlertModal";
 import { Outlet } from "react-router";
+<<<<<<< HEAD
+=======
+import Navbar from "./components/layout/Navbar";
+>>>>>>> main
 import { Toaster } from "@/components/ui/sonner"; // اتأكد إن المسار صح
 // const { t } = useTranslation();
+
 export default function App() {
-  // const { t } = useTranslation();
+  const queryClient = new QueryClient();
   return (
     <>
       <Outlet/>
@@ -20,5 +30,3 @@ export default function App() {
     </>
   );
 }
-
-// Flatten

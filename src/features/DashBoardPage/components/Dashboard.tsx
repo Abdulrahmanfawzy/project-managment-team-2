@@ -7,8 +7,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-
-export default function Dashprod() {
+import Navbar from "@/components/layout/Navbar";
+export default function Dashboard() {
   const chartData = [
     { month: "Jan", value: 10000 },
     { month: "Feb", value: 13000 },
@@ -19,7 +19,8 @@ export default function Dashprod() {
   ];
 
   return (
-       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 mt-4"> 
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-2 mt-4"> 
+    <Navbar/>
     {/* Column 1 */}
 <div className="relative overflow-hidden bg-white w-[750px]  rounded-3xl p-6 shadow-sm hover:shadow-md transition h-[420px]">
 

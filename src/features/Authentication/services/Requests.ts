@@ -32,8 +32,6 @@ export   async function LoginRequest(e , userData ,setLoading,navigate) {
   }
 }
 
-
-
   // Signup Request Api Function
  export  async function RegisterRequest(e, userData, setLoading, navigate) {
    e.preventDefault();

@@ -26,6 +26,7 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
+  InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
@@ -37,18 +38,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import { ResetRequest } from "../services/Requests";
 import { Link } from "react-router-dom";
-export default function ResetPassword({
+import { VerifyOtp } from "../services/Requests";
+
+
+
+export default function VerifyOTP({
   className,
   ...props
 }: React.ComponentProps<"div">) {
   const [userData, setUserData] = useState({
-    email: "",
+    otp: "123456",
   });
   const [loading, setLoading] = useState(false);
   const baseUrl = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  
 
   return (
     <>
@@ -72,12 +77,18 @@ export default function ResetPassword({
               <form>
                 <FieldGroup>
                   {/* Email Input Field */}
-                  <section className="text-center">
-                    <InputOTP maxLength={6} defaultValue="123456" className="p-3! bg-[#ddd]/50! text-center!">
-                      <InputOTPGroup>
+                  <section className="text-center flex justify-center">
+                    <InputOTP maxLength={6} id="otp-verification" 
+                    value={userData.otp}
+                    onChange={(e)=>{setUserData(e.target.value)}}
+                    required>
+                      <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
                         <InputOTPSlot index={0} />
                         <InputOTPSlot index={1} />
                         <InputOTPSlot index={2} />
+                      </InputOTPGroup>
+                      <InputOTPSeparator className="mx-2" />
+                      <InputOTPGroup className="*:data-[slot=input-otp-slot]:h-12 *:data-[slot=input-otp-slot]:w-11 *:data-[slot=input-otp-slot]:text-xl">
                         <InputOTPSlot index={3} />
                         <InputOTPSlot index={4} />
                         <InputOTPSlot index={5} />
@@ -92,10 +103,10 @@ export default function ResetPassword({
                       type="submit"
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                       onClick={(e) =>
-                        ResetRequest(e, userData, setLoading, navigate)
+                        VerifyOtp(e, userData, setLoading, navigate)
                       }
                     >
-                      reset
+                      verify
                       {loading && <Loader sizeNum={5} />}
                     </Button>
 

@@ -31,7 +31,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-import {ResetRequest} from "../services/Requests";
+import { ForgetPassRequest } from "../services/Requests";
 import {Link} from "react-router-dom";
 export default function ForgetPass({
   className,
@@ -131,11 +131,10 @@ export default function ForgetPass({
                     <Button
                       type="submit"
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
-                      onClick={(e) => ResetRequest(e,userData,setLoading,navigate)}
+                      onClick={(e) => ForgetPassRequest(e,userData,setLoading,navigate)}
                     >
                       reset password
                       {loading && <Loader sizeNum={5} />}
-
                     </Button>
 
                     <FieldDescription className="text-center">

@@ -15,12 +15,6 @@ export default function App() {
   // const { t } = useTranslation();
   return (
     <>
-      {/* <Login/> */}
-      {/* <Signup /> */}
-      {/* <ResetPassword/> */}
-      {/* <ProfilePage/> */}
-      {/* <Projectbref/> */}
-      {/* <Router/> */}
       <Outlet/>
       <Toaster richColors position="top-right" />
     </>

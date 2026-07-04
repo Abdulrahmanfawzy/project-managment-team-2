@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Button } from "../ui/button";
 import { Link, NavLink, useNavigate } from "react-router";
 import { BellDot, Heart, LogOut, Search, ShoppingCart } from "lucide-react";
-import DropdownProfileMenu from "./DropDownProfile";
+import DropdownProfileMenu from "../shared/DropDownProfile"
 
 function Navbar () {
     const [open, setOpen] = useState(false)

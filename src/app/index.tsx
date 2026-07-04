@@ -5,13 +5,17 @@ import {
   VerifyOTP,
   ResetPasswordPage,
 } from "./routes/AllDashboardPages";
+
+
+import {removeToken} from "../cookies/authServices";
+removeToken()
 import {
   ProfilePageData,
   ProfileTasksPage,
   ProfileFilesPage,
   ProfileAboutPage,
   Error,
-  Dashboard,
+  DashboardPage,
   AllProjects,
 } from "./routes/AllDashboardPages";
 import { Calendar } from "./routes/AllDashboardPages";
@@ -51,11 +55,11 @@ export const Router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <Dashboard />,
+            element: <DashboardPage />,
           },
           {
             path: "dashboard",
-            element: <Dashboard />,
+            element: <DashboardPage />,
           },
           {
             path: "AllProjects",

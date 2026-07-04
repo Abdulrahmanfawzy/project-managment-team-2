@@ -1,25 +1,41 @@
-import Router from "./app/index";
-import Login from "./components/Login";
-import ProfilePage from "./components/profilePage";
-import Calendar from "./calendar/calendar";
-import Layout from "./components/layout/dashboardLayout"
-import { CalendarProvider } from "./calendar/calendar-context";
-// const { t } = useTranslation();
+import React from "react";
+import "./App.css";
+import Bootnav from "./assets/Bootnav";
+import Dashboardstats from "./assets/Dashboardstats";
+import Dashboardbutton from "./assets/dashboardbutton";
+import DashboardCards from "./assets/DashboardCards";
+import ALLprojectapage from "./ALLprojectapage";
+import Filespage from "./assets/Filespage";
+import Taskspage from "./assets/Taskspage";
+import Mteeinspage from "./Mteeinspage";
 
-export default function App() {
-  // const { t } = useTranslation();
+import { Routes, Route } from "react-router-dom";
+
+function App() {
   return (
     <>
-      {/* <Login/> */}
-      {/* <ProfilePage/> */}
-      {/* <Router/> */}
-      <ProfilePage/>
-      {/* <Layout/> */}
-      {/* <CalendarProvider>
-        <Calendar />
-      </CalendarProvider> */}
+      {/* Navbar خارج Routes */}
+      <Bootnav />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <DashboardCards />
+              <Dashboardstats/>
+              <Dashboardbutton />
+            </>
+          }
+        />
+
+        <Route path="/projects" element={<ALLprojectapage />} />
+        <Route path="/files" element={<Filespage />} />
+        <Route path="/tasks" element={<Taskspage />} />
+        <Route path="/mteeins" element={<Mteeinspage />} />
+      </Routes>
     </>
   );
 }
 
-// Flatten
+export default App;

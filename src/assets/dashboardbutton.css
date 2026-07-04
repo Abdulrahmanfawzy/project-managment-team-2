@@ -1,0 +1,307 @@
+.dashboard {
+  
+  gap: 10px;
+  background-color: #f5f7fa;
+  font-family: 'Inter', sans-serif;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 100px;
+}
+
+.card {
+  background: #fff;
+  width: 350px;
+  height: 300px;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.card-header h3 { font-size: 16px; font-weight: 600; margin: 0; }
+.card-header span { font-size: 12px; color: #6b7280; cursor: pointer; }
+
+/* Tasks */
+.task-item { margin-bottom: 16px; }
+.task-title { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+.task-date { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+.progress-bar { height: 6px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.progress { height: 100%; border-radius: 4px; }
+.tag { font-size: 10px; padding: 2px 8px; border-radius: 12px; }
+.tag.high { background: #fee2e2; color: #b91c1c; }
+.tag.medium { background: #fef3c7; color: #b45309; }
+.tag.low { background: #dcfce7; color: #15803d; }
+
+/* Teams */
+.team-member { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; background: #ddd; object-fit: cover; }
+.team-info { flex: 1; }
+.team-name { font-size: 13px; }
+.team-tasks { font-size: 12px; color: #6b7280; }
+.team-progress { width: 60px; height: 4px; background: #e5e7eb; border-radius: 2px; }
+.team-progress > div { height: 100%; background: #4f46e5; border-radius: 2px; }
+
+/* Meetings */
+.meeting-item { margin-bottom: 16px; }
+.meeting-title { font-size: 14px; font-weight: 500; }
+.meeting-time { font-size: 12px; color: #6b7280; margin: 4px 0; }
+.avatars { display: flex; }
+.avatars .avatar { width: 24px; height: 24px; margin-left: -8px; border: 2px solid #fff; }
+
+/* Ask AI */
+.ai-box { background: #f9fafb; border-radius: 12px; padding: 12px; font-size: 13px; color: #6b7280; margin-bottom: 10px; }
+.ai-input { display: flex; gap: 8px; }
+.ai-input input { flex: 1; border: 1px solid #e5e7eb; border-radius: 8px; padding: 8px; font-size: 13px; }
+.ai-input button { background: #4f46e5; border: none; color: #fff; border-radius: 8px; padding: 0 12px; cursor: pointer; }
+
+/* Loading & Error */
+.center { display: flex; align-items: center; justify-content: center; height: 100vh; }
+
+@media (max-width: 1200px) { .dashboard { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .dashboard { grid-template-columns: 1fr; } }
+.dashboard {
+  display: grid;
+
+  /* Responsive auto fit */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+  gap: 16px;
+  padding: 16px;
+
+  background: #f5f7fa;
+
+  font-family: 'Inter', sans-serif;
+}
+
+/* Card */
+.card {
+  background: #fff;
+
+  border-radius: 14px;
+
+  padding: 14px;
+
+  min-height: 220px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,.04);
+
+  transition: .25s ease;
+
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 12px;
+}
+
+.card-header h3 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.card-header span {
+  font-size: 11px;
+}
+
+/* Team */
+.team-member {
+  gap: 8px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+}
+
+.team-name {
+  font-size: 12px;
+}
+
+.team-tasks {
+  font-size: 11px;
+}
+
+/* Meetings */
+.meeting-title {
+  font-size: 13px;
+}
+
+.meeting-time {
+  font-size: 11px;
+}
+
+/* AI */
+.ai-box {
+  padding: 10px;
+  font-size: 12px;
+}
+
+.ai-input input {
+  padding: 8px;
+  font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .dashboard {
+    gap: 10px;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}
+/* ================= Dashboard ================= */
+
+
+
+/* ================= Card ================= */
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 300px;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  transition: .3s;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* ================= 1230px ================= */
+
+@media (max-width:1230px){
+
+.dashboard{
+    grid-template-columns:repeat(2,1fr);
+    width:95%;
+}
+
+.card{
+    min-height:280px;
+}
+
+}
+
+/* ================= 700px ================= */
+
+@media (max-width:700px){
+
+.dashboard{
+    grid-template-columns:1fr;
+    width:95%;
+    gap:16px;
+    padding:12px;
+}
+
+.card{
+    min-height:auto;
+    padding:16px;
+}
+
+}
+
+/* ================= 600px ================= */
+
+@media (max-width:600px){
+
+.dashboard{
+    width:98%;
+    padding:10px;
+}
+
+.card{
+    padding:14px;
+    border-radius:14px;
+}
+
+.card-header h3{
+    font-size:15px;
+}
+
+}
+
+/* ================= 365px ================= */
+
+@media (max-width:365px){
+
+.dashboard{
+    width:100%;
+    padding:8px;
+    gap:12px;
+}
+
+.card{
+    padding:12px;
+    border-radius:12px;
+}
+
+.card-header h3{
+    font-size:13px;
+}
+
+.card-header span{
+    font-size:11px;
+}
+
+.avatar{
+    width:24px;
+    height:24px;
+}
+
+.team-name,
+.meeting-title{
+    font-size:12px;
+}
+
+.team-tasks,
+.meeting-time{
+    font-size:10px;
+}
+
+.ai-box{
+    font-size:11px;
+}
+
+.ai-input input{
+    font-size:11px;
+}
+
+}

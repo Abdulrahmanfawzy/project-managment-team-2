@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./BottomSection.css";
+import "./dashboardbutton.css";
 import { TOKEN } from "../constants/token";
-
+import { useNavigate } from "react-router";
 const base_url = import.meta.env.VITE_API_URL;
 
 type Task = { id: number; title: string; date: string; percent: number; priority: "High" | "Medium" | "Low"; };
 type Team = { id: number; name: string; tasks: string; percent: number; avatar: string; };
 type Meeting = { id: number; title: string; date: string; time: string; avatars: string[]; };
 
-// 1. حطي الداتا الوهمية هنا
 const mockTasks: Task[] = [
   { id: 1, title: "Crest Wireframes", date: "Due Today", percent: 82, priority: "High" },
   { id: 2, title: "User Research", date: "Due Dec 18", percent: 52, priority: "Medium" },
@@ -24,7 +23,9 @@ const mockMeetings: Meeting[] = [
   { id: 2, title: "Sprint Planning", date: "Dec 18", time: "13:00 - 13:30", avatars: ["https://i.pravatar.cc/24?u=4", "https://i.pravatar.cc/24?u=5"] },
 ];
 
-export default function BottomSection() {
+export default function Dashboardbutton() {
+  const navigate = useNavigate()
+  
   const [tasks, setTasks] = useState<Task[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
   const [meetings, setMeetings] = useState<Meeting[]>([]);
@@ -34,18 +35,19 @@ export default function BottomSection() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`${base_url}/projects`, { headers: { "Authorization": `Bearer ${TOKEN}` } });
+        const res = await fetch(`${base_url}/projects`, { headers: { "Authorization":
+           `Bearer ${TOKEN}` } });
         const data = await res.json();
         if (!res.ok) throw new Error(data.message);
 
-        // 2. السطر المهم: لو الـ API فاضي استخدمي الداتا الوهمية
         setTasks(data.tasks?.length ? data.tasks : mockTasks);
         setTeams(data.teams?.length ? data.teams : mockTeams);
         setMeetings(data.meetings?.length ? data.meetings : mockMeetings);
 
       } catch (err: any) {
         setError(err.message);
-        // 3. لو فيه Error اصلا، استخدمي الوهمي برضو
+
+
         setTasks(mockTasks);
         setTeams(mockTeams);
         setMeetings(mockMeetings);
@@ -57,13 +59,20 @@ export default function BottomSection() {
   }, []);
 
   if (loading) return <div className="center">Loading...</div>;
-  if (error) console.log("API Error:", error); // هنشوف الايرور في الكونسول بس
+  if (error) console.log("API Error:", error); 
 
   return (
     <div className="dashboard">
       {/* Tasks Card */}
       <div className="card">
-        <div className="card-header"><h3>Tasks</h3><span>View All</span></div>
+        <div className="card-header"><h3>Tasks</h3>
+              
+    <button onClick={()=> navigate('/Tasks')}
+     className="text-blue-500 text-sm font-medium hover:underline">
+      View All
+    </button>
+        </div>
+
         {tasks.map((task) => (
           <div key={task.id} className="task-item">
             <div className="task-title">
@@ -93,7 +102,12 @@ export default function BottomSection() {
 
       {/* Meetings Card */}
       <div className="card">
-        <div className="card-header"><h3>Upcoming meetings</h3><span>View All</span></div>
+        <div className="card-header"><h3>Upcoming meetings</h3>
+         <button onClick={()=> navigate('/meetings')}
+     className="text-blue-500 text-sm font-medium hover:underline">
+      View All
+    </button>
+        </div>
         {meetings.map((meeting) => (
           <div key={meeting.id} className="meeting-item">
             <p className="meeting-title">{meeting.title}</p>

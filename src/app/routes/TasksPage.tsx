@@ -22,7 +22,7 @@ function TasksPage() {
 
 
   return (
-    <div className="max-w-7xl mx-auto bg-background py-5 max-lg:px-5">      
+    <div className="bg-background py-5">      
       <div className="flex justify-between items-center mb-5">
         <div className=" flex gap-4">
           <SearchDemo />

@@ -16,9 +16,9 @@ export default function App() {
   const queryClient = new QueryClient()
   return (
     <>
-     <QueryClientProvider client={queryClient}>
-      <Router/>
-     </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+          <Router/>
+      </QueryClientProvider>
       {/* <Login/> */}
       {/* <Signup /> */}
       {/* <ResetPassword/> */}

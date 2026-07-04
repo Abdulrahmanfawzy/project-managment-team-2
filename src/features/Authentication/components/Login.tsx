@@ -1,10 +1,10 @@
 // Icons Lib
+import { setToken ,getToken} from "./../../../cookies/authServices";
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
-import { User } from "lucide-react";
 //=== Icons Lib===
-import AuthPagesNav from "./AuthPagesNav";
+import AuthPagesNav from "../../../components/shared/AuthPagesNav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,70 +21,48 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "@/components/ui/field";
-
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import Loader from "./shared/Loader";
+import Loader from "../../../components/shared/Loader"
 
-import { useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom"
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-
-
-export default function Signup({
+import {LoginRequest} from "../services/Requests";
+import { Link } from "react-router-dom";
+export default function Login({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [userData,setUserData] = useState({"name":"","email":"","password":"","password_confirmation":""})
-  const [loading,setLoading] = useState(false)
-  const baseUrl = import.meta.env.VITE_API_URL;
-  const navigate = useNavigate();
+ 
 
-  // Signup Request Api Function
-  async function registerMethod(e) {
-    e.preventDefault();
-    
-    const formData= new FormData()
-    formData.append("name",userData.name)
-    formData.append("email",userData.email)
-    formData.append("password",userData.password)
-    formData.append("password_confirmation",userData.password_confirmation);
-    setLoading(true);
-    try{
-      const response = await axios.post(`${baseUrl}/register`,formData,{
-        headers:{
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      toast.success(
-        "Congratulations! Your account has been successfully created.",
-        {position:"bottom-left"}
-      );
-      window.setTimeout(()=>{
-       navigate("/login");
-      },1000)
-    }catch(error){
-      toast.error(error.response.data.message, { position: "bottom-left" });
-    }finally{
-      setLoading(false);
-    }
-    
-  }
+   const [userData, setUserData] = useState({
+     email: "",
+     password: "",
+   });
+   
+   const [loading, setLoading] = useState(false);
+   const navigate = useNavigate();
+
   return (
     <>
       <AuthPagesNav />
-
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
-          className={cn("flex flex-col gap-6 w-full md:w-lg py-5", className)}
+          className={cn(
+            "flex flex-col gap-6 w-full md:w-lg -mt-3 py-5",
+            className,
+          )}
           {...props}
         >
-          <Card className="card shadow-mainShadow py-5 px-7 outline-1 outline-white">
+          <Card className="shadow-mainShadow py-5 px-7 outline-1 outline-white">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl capitalize">sign up</CardTitle>
-              <CardDescription>Connect with every application!</CardDescription>
+              <CardTitle className="text-3xl capitalize">sign in</CardTitle>
+              <CardDescription>
+                Welcome back, you’ve been missed!
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <form>
@@ -128,27 +106,6 @@ export default function Signup({
                     OR
                   </FieldSeparator>
 
-                  {/* Full Name Input Field */}
-                  <Field className="relative before:content-['Full_Name']  before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
-                    <User
-                      className="w-fit! absolute left-[16px] top-[50%] translate-y-[-50%] text-mutedText"
-                      size={19}
-                    />
-                    <Input
-                      id="Name"
-                      value={userData.name}
-                      onChange={(e) => {
-                        setUserData({ ...userData, name: e.target.value });
-                      }}
-                      type="text"
-                      placeholder="Full Name"
-                      required
-                      className="ps-10 pe-3 py-6 placeholder:text-mutedText"
-                    />
-                  </Field>
-
-                  {/*=== Full Name Input Field ===*/}
-
                   {/* Email Input Field */}
                   <Field className="relative before:content-['Email']  before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
                     <Mail
@@ -164,7 +121,7 @@ export default function Signup({
                       }}
                       placeholder="Your Email"
                       required
-                      className="ps-10 pe-3 py-6  placeholder:text-mutedText"
+                      className="ps-10 pe-3 py-6    placeholder:text-mutedText"
                     />
                   </Field>
 
@@ -181,11 +138,7 @@ export default function Signup({
                       type="Password"
                       value={userData.password}
                       onChange={(e) => {
-                        setUserData({
-                          ...userData,
-                          password: e.target.value,
-                          password_confirmation: e.target.value,
-                        });
+                        setUserData({ ...userData, password: e.target.value });
                       }}
                       placeholder="Password"
                       required
@@ -212,33 +165,33 @@ export default function Signup({
                     {/*=== CheckBox ===*/}
 
                     {/* Forgot Password Link */}
-                    <a
-                      href="#"
+                    <Link
+                      to="/forgetPass"
                       className="ml-auto text-sm underline-offset-4 hover:underline text-brand whitespace-nowrap"
                     >
                       Forgot your password?
-                    </a>
+                    </Link>
                     {/*=== Forgot Password Link ===*/}
                   </section>
 
                   <Field>
                     <Button
                       type="submit"
-                      onClick={(e) => registerMethod(e)}
+                      onClick={(e)=>LoginRequest(e,userData,setLoading,navigate)}
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
                     >
-                      sign up
+                      Log in
                       {loading && <Loader sizeNum={5} />}
                     </Button>
                     <FieldDescription className="text-center">
                       Don&apos;t have an account yet?{" "}
                       {/* ####### Here We Can But Link Tag ######### */}
-                      <a
-                        href="#"
+                      <Link
+                        to="/signup"
                         className="text-brand decoration-0 font-semibold"
                       >
-                        Sign In
-                      </a>
+                        Sign up
+                      </Link>
                     </FieldDescription>
                   </Field>
                 </FieldGroup>

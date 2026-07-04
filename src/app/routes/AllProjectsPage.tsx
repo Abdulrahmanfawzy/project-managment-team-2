@@ -5,17 +5,11 @@ import {
   Users,
   ChevronDown,
 } from "lucide-react";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import Dropdown from "../../components/Dropdown";
-import NewProjectModal from "../../features/AllProjectsPage/NewProjectModal";
-import Projectbref from "../../components/Projectbref";
-import Overview from "../../features/AllProjectsPage/Overview";
-import Tasks from "../../features/AllProjectsPage/Tasks";
-import Teams from "../../features/AllProjectsPage/teams/Teams";
-import FilesTab from "../../features/AllProjectsPage/FilesTab";
-import AddProjectButton from "../../features/AllProjectsPage/AddProjectButton";
-import Navbar from "../../components/shared/Navbar"
+import { useState } from "react";
+// import Dropdown from "../../components/Dropdown";
+// import NewProjectModal from "../../components/NewProjectModal";
+// import Projectbref from "../../components/Projectbref";
+// import Overview from "./Overview";
 
 
 function AllProjectsPage() {

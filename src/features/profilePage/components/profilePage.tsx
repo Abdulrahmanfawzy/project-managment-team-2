@@ -1,4 +1,4 @@
-import AuthPagesNav from "./AuthPagesNav"
+import AuthPagesNav from "../../../components/shared/AuthPagesNav"
 import AnalysisCard from "./AnalysisCard";
 import ProfilePageAbout from "./ProfilePageAbout";
 // React Hooks
@@ -8,8 +8,9 @@ import { CalendarDays } from "lucide-react";
 import { Settings } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
 import { Clock } from "lucide-react";
-
-
+import {RouterProvider} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 const linksContents=[
   "overview",
   "tasks",
@@ -28,7 +29,7 @@ function handleProfileMainLinks() {
   /*====== Here We Want to Put Link Tag From React Router Dom ====== */
   return linksContents.map((linkContent, index) => {
     return (
-      <a
+      <Link to={`/${linkContent.toLowerCase()}`}
         key={index}
         className={`relative inline-block cursor-pointer  py-2 capitalize text-lg font-semibold before:content-[''] before:absolute before:bottom-0 before:left-0 before:w-full before:h-0.5 before:bg-brand hover:text-brand transition-all duration-200 ${index === activeLinkIndex ? "before:visible text-brand" : " before:invisible text-mainText"}`}
         onClick={() => {
@@ -36,7 +37,7 @@ function handleProfileMainLinks() {
         }}
       >
         <li>{linkContent}</li>
-      </a>
+      </Link>
     );
   });
 }
@@ -44,7 +45,6 @@ function handleProfileMainLinks() {
 function handleActiveLinks(index) {
   setActiveLinkIndex(index);
 }
-
 
     return (
       <>
@@ -117,7 +117,7 @@ function handleActiveLinks(index) {
           {/*=== Switch Pages Links ===*/}
 
           <section className="mainContainer">
-            <ProfilePageAbout />
+            <Outlet/>
           </section>
         </section>
       </>

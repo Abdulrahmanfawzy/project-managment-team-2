@@ -10,6 +10,9 @@ import VerifyOtp from "@/features/Authentication/components/VerifyOTP"
 import ResetPassword from "@/features/Authentication/components/ResetPassword";
 import ErrorPage from "./404Page";
 import AllProjectsPage from "./AllProjectsPage";
+
+
+
 export const LoginPage=()=><Login/>
 export const SignupPage=()=><Signup/>
 export const VerifyOTP = () => <VerifyOtp />;

@@ -1,10 +1,11 @@
 // Icons Lib
-import { setToken ,getToken} from "./authServices";
 import { Check } from "lucide-react";
 import { LockKeyhole } from "lucide-react";
 import { Mail } from "lucide-react";
+import { User } from "lucide-react";
+
 //=== Icons Lib===
-import AuthPagesNav from "./AuthPagesNav";
+import AuthPagesNav from "../../../components/shared/AuthPagesNav";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,75 +25,45 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import Loader from "./shared/Loader";
+import Loader from "../../../components/shared/Loader";
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "sonner";
-
-export default function Login({
+import {ResetRequest} from "../services/Requests";
+import {Link} from "react-router-dom";
+export default function ForgetPass({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+
+
+  const [userData, setUserData] = useState({
+    email: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const baseUrl = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
  
-
-   const [userData, setUserData] = useState({
-     email: "",
-     password: "",
-   });
-   
-   const [loading, setLoading] = useState(false);
-   const baseUrl = import.meta.env.VITE_API_URL;
-   const navigate = useNavigate();
-
-   // Login Request Api Function
-   async function loginMethod(e) {
-     e.preventDefault();
-     const formData = new FormData();
-     formData.append("email", userData.email);
-     formData.append("password", userData.password);
-     
-     setLoading(true);
-     try {
-       const response = await axios.post(`${baseUrl}/login`, formData, {
-         headers: {
-           "Content-Type": "multipart/form-data",
-         },
-       });
-       const token = response.data.data.token;
-       setToken(token)
-       toast.success(
-         "Welcome Back !",
-         { position: "bottom-left" },
-       );
-       window.setTimeout(() => {
-         navigate("/dashboard");
-       }, 1000);
-     } catch (error) {
-       toast.error(error.response.data.message, { position: "bottom-left" });
-     } finally {
-       setLoading(false);
-     }
-   }
-
-
   return (
     <>
       <AuthPagesNav />
       <section className="mainContainer flex justify-center items-center min-h-[calc(100vh-82px)]">
         <div
           className={cn(
-            "flex flex-col gap-6 w-full md:w-lg -mt-3 py-5",
+            "flex flex-col gap-6 w-full md:w-lg -mt-5 py-5",
             className,
           )}
           {...props}
         >
           <Card className="shadow-mainShadow py-5 px-7 outline-1 outline-white">
             <CardHeader className="text-center">
-              <CardTitle className="text-3xl capitalize">sign in</CardTitle>
+              <CardTitle className="text-3xl capitalize">
+                forgot password
+              </CardTitle>
               <CardDescription>
-                Welcome back, you’ve been missed!
+                Enter your email address to receive a password reset link.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -147,82 +118,35 @@ export default function Login({
                       id="email"
                       type="email"
                       value={userData.email}
-                      onChange={(e) => {
-                        setUserData({ ...userData, email: e.target.value });
-                      }}
+                      onChange={(e)=>{setUserData({"email":e.target.value})}}
                       placeholder="Your Email"
                       required
-                      className="ps-10 pe-3 py-6    placeholder:text-mutedText"
+                      className="ps-10 pe-3 py-6  placeholder:text-mutedText"
                     />
                   </Field>
 
                   {/*=== Email Input Field ===*/}
 
-                  {/* Password Field */}
-                  <Field className="relative before:content-['Password'] before:absolute before:top-[-20%] before:left-[17px]  before:text-mutedText before:bg-white before:h-[1rem]">
-                    <LockKeyhole
-                      className="w-fit! absolute left-[16px] top-[50%] translate-y-[-50%] text-mutedText"
-                      size={19}
-                    />
-                    <Input
-                      id="password"
-                      type="Password"
-                      value={userData.password}
-                      onChange={(e) => {
-                        setUserData({ ...userData, password: e.target.value });
-                      }}
-                      placeholder="Password"
-                      required
-                      className="ps-10 pe-3 py-6 placeholder:text-mutedText"
-                    />
-                  </Field>
-                  {/*=== Password Field ===*/}
-
-                  <section className="flex">
-                    {/* CheckBox */}
-                    <Field orientation="horizontal">
-                      <Checkbox
-                        id="terms-checkbox"
-                        name="terms-checkbox"
-                        className="cursor-pointer"
-                      />
-                      <Label
-                        htmlFor="terms-checkbox"
-                        className="capitalize text-mutedText font-normal cursor-pointer"
-                      >
-                        remember me
-                      </Label>
-                    </Field>
-                    {/*=== CheckBox ===*/}
-
-                    {/* Forgot Password Link */}
-                    <a
-                      href="#"
-                      className="ml-auto text-sm underline-offset-4 hover:underline text-brand whitespace-nowrap"
-                    >
-                      Forgot your password?
-                    </a>
-                    {/*=== Forgot Password Link ===*/}
-                  </section>
-
                   <Field>
                     <Button
                       type="submit"
-                      onClick={(e)=>loginMethod(e)}
                       className="bg-brand capitalize text-light! rounded-xl font-semibold cursor-pointer mb-3"
+                      onClick={(e) => ResetRequest(e,userData,setLoading,navigate)}
                     >
-                      Log in
+                      reset password
                       {loading && <Loader sizeNum={5} />}
+
                     </Button>
+
                     <FieldDescription className="text-center">
-                      Don&apos;t have an account yet?{" "}
+                      Remember your password?{" "}
                       {/* ####### Here We Can But Link Tag ######### */}
-                      <a
-                        href="#"
+                      <Link
+                        to="/signin"
                         className="text-brand decoration-0 font-semibold"
                       >
-                        Sign up
-                      </a>
+                        Sign In
+                      </Link>
                     </FieldDescription>
                   </Field>
                 </FieldGroup>

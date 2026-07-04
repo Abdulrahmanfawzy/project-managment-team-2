@@ -1,7 +1,7 @@
-import { CalendarProvider } from "./calendar-context";
-import { CalendarHeader } from "./calendar-header";
-import { CalendarBody } from "./body/calendar-body";
-import { EventModal } from "./event-modal"; // تأكد من اسم الملف والمسار
+import { CalendarProvider } from "./calendar/calendar-context";
+import { CalendarHeader } from "./calendar/calendar-header";
+import { CalendarBody } from "./calendar/body/calendar-body";
+import { EventModal } from "./calendar/event-modal"; // تأكد من اسم الملف والمسار
 
 export default function CalendarPage() {
   return (

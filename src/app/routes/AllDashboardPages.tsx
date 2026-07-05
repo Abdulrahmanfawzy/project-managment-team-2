@@ -9,15 +9,19 @@ import AddMeetingCalendarPage from "@/features/AddMettingPage/components/calenda
 import VerifyOtp from "@/features/Authentication/components/VerifyOTP"
 import ResetPassword from "@/features/Authentication/components/ResetPassword";
 import ErrorPage from "./404Page";
-import AllProjectsPage from "./AllProjectsPage";
+import Dashboard from "@/features/DashBoardPage/components/Dashboard";
+import Calendar from "@/features/AddMettingPage/components/calendar";
+// import AllProjects from "./AllProjectsPage";
 
 export const LoginPage=()=><Login/>
 export const SignupPage=()=><Signup/>
 export const VerifyOTP = () => <VerifyOtp />;
 export const ForgetPassPage=()=><ForgetPass/>
-export const Dashboard=()=><Dashboard/>
+export const DashboardPage=()=><Dashboard/>
 export const ProfilePageData = () => <ProfilePage />
 export const ProfileTasksPage=()=><ProfilePageTasks/>
 export const ProfileFilesPage=()=><ProfilePageFiles/>
 export const ProfileAboutPage=()=><ProfilePageAbout/>
+export const ResetPasswordPage=()=><ResetPassword/>
 export const Error = ()=> <ErrorPage/>
+export const CalendarPage=()=><Calendar/>

@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-// // createBrowserRouter (Routes only)
-
-// import { Routes,  Route} from "react-router"
-// import TasksPage from "./routes/TasksPage"
-// import DashboardLayout from "@/components/layout/dashboardLayout"
-// import Login from "@/components/Login"
-// import Signup from "@/components/Signup"
-// import AuthLayout from "src/components/layout/AuthLayout.tsx"
-// function Router() {
-//   return (
-//     <Routes>
-//       <Route path="/" element={<DashboardLayout />}>
-//         <Route index element={<p>Home Page</p>} />
-//         <Route path="/tasks" element={<TasksPage />} />
-//       </Route>
-//       <Route path="/auth" element={<AuthLayout />}>
-//         <Route index={true} element={<Login />}></Route>
-//         <Route path="/signup" element={<Signup />}></Route>
-//       </Route>
-//     </Routes>
-//   );
-// }
-
-// export default Router
-
 import {
   ForgetPassPage,
   LoginPage,
@@ -31,33 +5,16 @@ import {
   VerifyOTP,
   ResetPasswordPage,
 } from "./routes/AllDashboardPages";
-=======
-import {
-  ForgetPassPage,
-  LoginPage,
-  SignupPage,
-  VerifyOTP,
-  ResetPasswordPage,
-} from "./routes/AllDashboardPages";
-
-
-import {removeToken} from "../cookies/authServices";
-removeToken()
->>>>>>> main
 import {
   ProfilePageData,
   ProfileTasksPage,
   ProfileFilesPage,
   ProfileAboutPage,
   Error,
-<<<<<<< HEAD
-  Dashboard,
-=======
   DashboardPage,
->>>>>>> main
-  AllProjects,
+  
 } from "./routes/AllDashboardPages";
-import { Calendar } from "./routes/AllDashboardPages";
+import { CalendarPage} from "./routes/AllDashboardPages";
 import TasksPage from "./routes/TasksPage";
 import App from "@/App";
 
@@ -94,27 +51,19 @@ export const Router = createBrowserRouter([
         children: [
           {
             index: true,
-<<<<<<< HEAD
-            element: <Dashboard />,
-          },
-          {
-            path: "dashboard",
-            element: <Dashboard />,
-=======
             element: <DashboardPage />,
           },
           {
             path: "dashboard",
             element: <DashboardPage />,
->>>>>>> main
           },
-          {
-            path: "AllProjects",
-            element: <AllProjects />,
-          },
+          // {
+          //   path: "AllProjects",
+          //   element: <AllProjects />,
+          // },
           {
             path: "calendar",
-            element: <Calendar />,
+            element: <CalendarPage />,
           },
           {
             path: "tasks",
@@ -154,8 +103,4 @@ export const Router = createBrowserRouter([
       },
     ],
   },
-<<<<<<< HEAD
 ]);
-=======
-]);
->>>>>>> main

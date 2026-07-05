@@ -17,7 +17,7 @@ export function SelectInput({value, onValueChange}: {value: string, onValueChang
         <SelectContent>
             <SelectGroup>
                 <SelectLabel>Report Types</SelectLabel>
-                <SelectItem value="project_progress">Project Progress</SelectItem>
+                <SelectItem value="project">Project Progress</SelectItem>
                 <SelectItem value="meeting_summary">Meeting Summary</SelectItem>
                 <SelectItem value="worker_performance">Worker Performance</SelectItem>
                 <SelectItem value="tasks">Tasks</SelectItem>

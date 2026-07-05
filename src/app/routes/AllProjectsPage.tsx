@@ -95,9 +95,8 @@ function AllProjectsPage() {
   };
   return (
     <>
-      <Navbar />
-      <div className="bg-gray-100 min-h-screen mt-2">
-        <div className="flex flex-col w-11/12 m-auto">
+      <div className="">
+        <div className="flex flex-col">
           {selectedPage === "all projects" && (
             <>
               <div className="flex justify-between items-center">

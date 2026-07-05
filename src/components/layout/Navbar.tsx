@@ -18,9 +18,9 @@ function Navbar () {
     { name: "Dashboard", path: "/" },
     { name: "Projects", path: "/projects" },
     { name: "Tasks", path: "/tasks" },
+    { name: "Reports", path: "/reports" },
     { name: "Chats", path: "/chats" },
     { name: "Meetings", path: "/meetings" },
-    { name: "Reports", path: "/reports" },
   ];
 
     return (

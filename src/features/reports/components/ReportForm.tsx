@@ -49,7 +49,7 @@ export function ReportForm() {
     
     function onSubmit(data: z.infer<typeof reportSchema>) {
         console.log(data)
-        createReportMutation.mutate({...data, start_date: data.start_date.toDateString(), end_date: data.end_date.toDateString()})
+        createReportMutation.mutate({...data, start_date: data.start_date.toISOString().split("T")[0], end_date: data.end_date.toISOString().split("T")[0]})
     }
 
     return (
